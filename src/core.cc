@@ -1263,8 +1263,7 @@ struct text_object *construct_text_object(char *s, const char *arg,
 	END OBJ(running_processes, &update_top)
 	obj->callbacks.print = &print_running_processes;
 #elif (defined(__APPLE__) && defined(__MACH__))
-    END OBJ(running_processes, &update_top)
-    	top_running = 1;
+    END OBJ(running_processes, &update_running_processes)   /* update_running_processes() for darwin calls update_top() and sets the top_running flag */
     	obj->callbacks.print = &print_running_processes;
     END OBJ(threads, &update_threads)
     	obj->callbacks.print = &print_threads;

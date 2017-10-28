@@ -36,6 +36,9 @@
 
 /* Some TODOS are shown in the 'issues' section in GitHub */
 
+// TODO: fix the bug the causes SEGMENTATION FAULT ( happened when we introduced the update_running_processes code )
+//          Probably because we do top_running = 1 every time... but we need only once...
+
 // SIP STATUS:
 // TODO: not sure if I have added the sip_status END OBJ... code in the correct place ---> macOS specific feature
 // TODO: dont forget to follow the guide for adding new features to conky!! hmmm
@@ -473,124 +476,12 @@ process_threads(
         }
         else if (nb == sizeof(ti)) {
             *p += (ti.pth_run_state == TH_STATE_RUNNING);
-            
-            //if (ti.pth_run_state == TH_STATE_RUNNING)
-            //    printf("pid %i: GOT RUNNING\n", pid);
         }
         else {
             /* We should never hit this */
             printf("We are hopeless here!\n");
         }
-        
-        /*
-        uint64_t t;
-        struct proc_threadwithpathinfo tpi;
-        
-        t = Threads[i];
-        nb = proc_pidinfo(pid, PROC_PIDTHREADPATHINFO, t, &tpi,
-                          sizeof(tpi));
-        
-        if (nb <= 0) {
-            if ((errno == ESRCH) || (errno == EINVAL)) {
-                
-                //
-                // Quit if no more thread information is available for the
-                // process.
-                //
-                return;
-            }
-            //
-            // Warn about all other errors via a NAME column message.
-            //
-            alloc_lfile(TWD, -1);
-            Cfp = (struct file *)NULL;
-            (void) snpf(Namech, Namechl,
-                        "thread info error: %s", strerror(errno));
-            Namech[Namechl - 1] = '\0';
-            enter_nm(Namech);
-            if (Lf->sf)
-                link_lfile();
-                return;
-        } else if (nb < sizeof(tpi)) {
-            (void) fprintf(stderr,
-                           "%s: PID %d: proc_pidinfo(PROC_PIDTHREADPATHINFO);\n",
-                           Pn, pid);
-            (void) fprintf(stderr,
-                           "      too few bytes; expected %ld, got %d\n",
-                           sizeof(tpi), nb);
-            Exit(1);
-        }
-         */
-        /*
-        if (tpi.pvip.vip_path[0]) {
-            alloc_lfile(TWD, -1);
-            Cfp = (struct file *)NULL;
-            (void) enter_vnode_info(&tpi.pvip);
-            if (Lf->sf)
-                link_lfile();
-                }
-         */
     }
-}
-
-int update_running_threads_OLD(void)
-{
-    printf("Update running threads start----------------------\n");
-    
-    int run_threads = 0;
-    
-    int err = 0;
-    struct kinfo_proc *p = NULL;
-    size_t length = 0;
-    
-    static const int name[] = { CTL_KERN, KERN_PROC, KERN_PROC_ALL, 0 };
-    
-    // Call sysctl with a NULL buffer to get proper length
-    err = sysctl((int *)name, (sizeof(name) / sizeof(*name)) - 1, NULL, &length, NULL, 0);
-    if (err) {
-        perror(NULL);
-        return 0;
-    }
-    
-    // Allocate buffer
-    p = (kinfo_proc*)malloc(length);
-    if (!p) {
-        perror(NULL);
-        return 0;
-    }
-    
-    // Get the actual process list
-    err = sysctl((int *)name, (sizeof(name) / sizeof(*name)) - 1, p, &length, NULL, 0);
-    if (err)
-    {
-        perror(NULL);
-        free(p);
-        return 0;
-    }
-    
-    int proc_count = length / sizeof(struct kinfo_proc);
-    
-    for (int i = 0; i < proc_count; i++) {
-        int cnt = 0;
-        
-        /*
-         *  We need to pass the number of threads WE BELIEVE the process may be using.
-         *  Lets say that the process is using 10, and leave the function to set the number for us
-         *
-         *  NOTE: 10 is used by ME as an average value that wont be too big, and wont be too small to allow the function to run faster.
-         */
-        // TODO: Replace the code to find the PIDs with proc_* functions in order to get access to tai.ptinfo.pti_threadnum and replace number 10 with that.
-        
-        process_threads( (uint32_t)p[i].kp_proc.p_pid, 10, (uint32_t *)&cnt); // run_threads += get_runthreads_for_pid(p[i].kp_proc.p_pid);
-        run_threads += cnt;
-    }
-    
-    info.run_threads = run_threads;
-    
-    printf("Update running threads end----------------------\n\n");
-    
-    free(p);
-    return 0;
 }
 
 int update_running_threads(void)
@@ -599,28 +490,28 @@ int update_running_threads(void)
     
     int run_threads = 0;
     
-    int proc_count = 0;
+    int pids_count = 0;
     int *pid_buffer;
     
     // get the pid count in our Mac system.
-    if ((proc_count = proc_listallpids(NULL, 0)) <= 0) {
+    if ((pids_count = proc_listallpids(NULL, 0)) <= 0) {
         perror("get_listpids");
         return 0;
     }
     
     // apply mamory to store all these pids
-    if ((pid_buffer = (int *)malloc(proc_count * sizeof(pid_t))) == NULL) {
+    if ((pid_buffer = (int *)malloc(pids_count * sizeof(pid_t))) == NULL) {
         perror("proc_pid malloc");
         return 0;
     }
     
     // store all these pids to the buffer
-    if ((proc_count = proc_listallpids(pid_buffer, proc_count * sizeof(pid_t))) <= 0) {
+    if ((pids_count = proc_listallpids(pid_buffer, pids_count * sizeof(pid_t))) <= 0) {
         perror("alloc pid buffer");
         return 0;
     }
     
-    for (int i = 0; i < proc_count; i++)
+    for (int i = 0; i < pids_count; i++)
     {
         struct proc_taskallinfo pti;
         int cnt = 0;
@@ -637,7 +528,6 @@ int update_running_threads(void)
                 // process.
                 //
                 continue;
-//                return;
             }
         }
         else if (res < sizeof(pti)) {
@@ -648,7 +538,6 @@ int update_running_threads(void)
                            sizeof(pti), res);
             
             continue;
-//            return;
         }
         else if (res == sizeof(pti)) {
             process_threads( pid_buffer[i], pti.ptinfo.pti_threadnum, (uint32_t *)&cnt);
@@ -711,6 +600,10 @@ int update_running_processes(void)
      *                  3) if YES, it means that the process is running, if NOT then the process is not running
      */
     
+    /* these lines are written here instead of core.cc */
+    update_top();
+    top_running = 1;
+    
     int err = 0;
     struct kinfo_proc *p = NULL;
     size_t length = 0;
@@ -741,27 +634,49 @@ int update_running_processes(void)
     }
     
     int proc_count = length / sizeof(struct kinfo_proc);
-    
     int run_procs = 0;
     
-    for (int i = 0; i < proc_count; i++) {
-        if (p[i].kp_proc.p_stat == SRUN)    // This method doesnt work!
-            run_procs++;
+    for (int i = 0; i < proc_count; i++)
+    {
+        //
+        // get numthreads
+        //
+        struct proc_taskinfo pti;
         
-        /*
-         Implementation:
-         
-         int cnt = 0;
-         int numthreads = 0;
-         
-         //
-         // TODO: add proc_* for getting numthreads
-         //
-         
-         process_threads(pid, numthreads, &cnt);
-         if (cnt != 0)
-             run_procs++;
-         */
+        int res = proc_pidinfo(p[i].kp_proc.p_pid, PROC_PIDTASKINFO, 0, &pti, sizeof(pti));
+        
+        if (res <= 0) {
+            if ((errno == ESRCH) || (errno == EINVAL)) {
+                
+                printf("No more task info available for pid: %i\n", p[i].kp_proc.p_pid);
+                
+                //
+                // Quit if no more task information is available for the
+                // process.
+                //
+                continue;
+            }
+        }
+        else if (res < sizeof(pti)) {
+            (void) fprintf(stderr,
+                           "proc_pidinfo: PID %i: proc_pidinfo(PROC_PIDTASKINFO);\n", p[i].kp_proc.p_pid);
+            (void) fprintf(stderr,
+                           "      too few bytes; expected %ld, got %d\n",
+                           sizeof(pti), res);
+            
+            continue;
+        }
+        else if (res == sizeof(pti)) {
+            int cnt = 0;
+            
+            process_threads(p[i].kp_proc.p_pid, pti.pti_threadnum, (uint32_t *)&cnt);
+            if (cnt > 0)
+                run_procs++;
+            
+            // OTHER IMPLEMENTATION:
+            //if (pti.pti_numrunning > 0)
+            //    run_procs++;
+        }
     }
     
     info.run_procs = run_procs;
