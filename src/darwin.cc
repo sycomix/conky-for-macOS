@@ -533,7 +533,7 @@ process_threads(
     }
 }
 
-int update_running_threads(void)
+int update_running_threads_OLD(void)
 {
     printf("Update running threads start----------------------\n");
     
@@ -593,48 +593,73 @@ int update_running_threads(void)
     return 0;
 }
 
-int update_running_threads_NOT_READY(void)    /* TODO: Fix this function */
+int update_running_threads(void)
 {
+    printf("Update running threads start----------------------\n");
+    
     int run_threads = 0;
-
-    struct proc_taskallinfo *p = NULL;
-    size_t length = 0;
     
-    update_total_processes();
-    int proc_count = info.procs;
-    length = proc_count * sizeof(proc_taskallinfo);
+    int proc_count = 0;
+    int *pid_buffer;
     
-    // Allocate buffer
-    p = (proc_taskallinfo*)malloc(length);
-    if (!p) {
-        perror(NULL);
+    // get the pid count in our Mac system.
+    if ((proc_count = proc_listallpids(NULL, 0)) <= 0) {
+        perror("get_listpids");
         return 0;
     }
     
-    int proc_result = proc_listallpids( p, proc_count );
-    
-    if (proc_result != proc_count)
-    {
-        printf("proc_result = %i while expected %d\n", proc_result, proc_count);
-        //return 0;   // error -- TODO: handle each error later
+    // apply mamory to store all these pids
+    if ((pid_buffer = (int *)malloc(proc_count * sizeof(pid_t))) == NULL) {
+        perror("proc_pid malloc");
+        return 0;
     }
     
-    for (int i = 0; i < proc_count; i++) {
+    // store all these pids to the buffer
+    if ((proc_count = proc_listallpids(pid_buffer, proc_count * sizeof(pid_t))) <= 0) {
+        perror("alloc pid buffer");
+        return 0;
+    }
+    
+    for (int i = 0; i < proc_count; i++)
+    {
+        struct proc_taskallinfo pti;
         int cnt = 0;
+    
+        int res = proc_pidinfo( pid_buffer[i], PROC_PIDTASKALLINFO, 0, &pti, sizeof(pti));
         
-        //
-        //  TODO: Add code for getting threadnum
-        //
-        
-        process_threads( p[i].pbsd.pbi_pid, p[i].ptinfo.pti_threadnum, (uint32_t *)&cnt); // run_threads += get_runthreads_for_pid(p[i].kp_proc.p_pid);
-        run_threads += cnt;
+        if (res <= 0) {
+            if ((errno == ESRCH) || (errno == EINVAL)) {
+                
+                printf("No more thread info available for pid: %i\n", pid_buffer[i]);
+                
+                //
+                // Quit if no more thread information is available for the
+                // process.
+                //
+                continue;
+//                return;
+            }
+        }
+        else if (res < sizeof(pti)) {
+            (void) fprintf(stderr,
+                           "ss: PID dd: proc_pidinfo(PROC_PIDTASKALLINFO);\n");
+            (void) fprintf(stderr,
+                           "      too few bytes; expected %ld, got %d\n",
+                           sizeof(pti), res);
+            
+            continue;
+//            return;
+        }
+        else if (res == sizeof(pti)) {
+            process_threads( pid_buffer[i], pti.ptinfo.pti_threadnum, (uint32_t *)&cnt);
+            run_threads += cnt;
+        }
     }
     
     info.run_threads = run_threads;
     
     printf("Update running threads end----------------------\n\n");
     
-    free(p);
     return 0;
 }
 
