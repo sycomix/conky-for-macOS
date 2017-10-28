@@ -19,6 +19,8 @@
 //  darwin.cc
 //  Nickolas Pylarinos
 //
+//  ~ To my friends mrt and vggol ~
+//
 //	This is the equivalent of linux.cc, freebsd.cc, openbsd.cc etc. ( you get the idea )
 //  For implementing functions I took ideas from FreeBSD.cc! Thanks for the great code!
 //
@@ -32,10 +34,7 @@
 
 // keywords used are TODO, FIXME, BUG
 
-// TODO: fix update_meminfo for getting the same stats as Activity Monitor's --- There is small difference though
-// TODO: convert get_cpu_count() to use mib instead of namedsysctl
-// TODO: test getcpucount further   -- Changed to hw.logicalcpumax
-// TODO: see linux.cc for more info into implementation of certain functions
+/* Some TODOS are shown in the 'issues' section in GitHub */
 
 // SIP STATUS:
 // TODO: not sure if I have added the sip_status END OBJ... code in the correct place ---> macOS specific feature
@@ -260,7 +259,7 @@ int update_meminfo(void)
     }
     else {
         info.memmax = 0;
-        perror( "sysctl" );
+        perror("sysctl");
     }
     
     //
@@ -304,7 +303,7 @@ int update_net_stats(void)
      *  NOTE: We could use code from OpenBSD.cc ??
      */
     
-    printf( "update_net_stats: STUB\n" );
+    printf("update_net_stats: STUB\n");
     return 0;
 }
 
@@ -339,7 +338,7 @@ int get_from_load_info( int what )
     
     if (!machStuffInitialised)
     {
-        printf( "\n\n\nRunning ONLY ONCE the mach--init block\n\n\n" );
+        printf("\n\n\nRunning ONLY ONCE the mach--init block\n\n\n");
         
         // Set up our mach host and default processor set for later calls
         machHost = mach_host_self();
@@ -366,7 +365,7 @@ int get_from_load_info( int what )
             return loadInfo.thread_count;
             break;
         default:
-            printf( "Error: Unxpected flag passed to get_from_load_info()" );
+            printf("Error: Unxpected flag passed to get_from_load_info()\n");
             return 0;
             break;
     }
@@ -375,19 +374,267 @@ int get_from_load_info( int what )
 int update_threads(void)
 {
     info.threads = get_from_load_info(DARWIN_CONKY_THREADS_COUNT);
-    printf( "update_threads: got thread count: %i\n", info.threads );
     return 0;
+}
+
+/*
+ *  These three are for process_threads() function
+ */
+#define    THREADS_INCR    (sizeof(uint64_t) * 32)      /* Threads space increment */
+static int NbThreads = 0;                               /* Threads bytes allocated */
+static uint64_t *Threads = (uint64_t *)NULL;            /* Thread buffer */
+
+
+/*
+ * process_threads() -- process thread information -- Based on lsof/dialects/darwin/libproc/dproc.c function
+ */
+static void
+process_threads(
+                    int pid,    /* PID */
+                    uint32_t n, /* number of threads */
+                    uint32_t *p /* npyl: send the result to the caller */
+                )
+{
+    /*
+     *  TODO: we need to add a deallocation function... for when conky EXITS
+     *  TODO: patch Pn to follow the implementation of the original function?? Or eliminate Pn
+     */
+    
+    const char* Pn = "proccess_threads";
+    
+    int i, nb, nt;
+    /*
+     * Make sure a thread buffer has been allocated.
+     */
+    n += 10;
+    if (n > NbThreads) {
+        while (n > NbThreads) {
+            NbThreads += THREADS_INCR;
+        }
+        if (!Threads)
+            Threads = (uint64_t *)malloc(NbThreads);
+            else
+                Threads = (uint64_t *)realloc(Threads,
+                                              NbThreads);
+                if (!Threads) {
+                    (void) fprintf(stderr,
+                                   "%s: can't allocate space for %d Threads\n", Pn,
+                                   (int)(NbThreads / sizeof(int *)));
+                    return;
+                }
+    }
+    /*
+     * Get thread information for the process.
+     */
+    nb = proc_pidinfo(pid, PROC_PIDLISTTHREADS, 0, Threads, NbThreads);
+    if (nb <= 0) {
+        if (errno == ESRCH) {
+            
+            /*
+             * Quit if no thread information is available for the
+             * process.
+             */
+            return;
+        }
+    }
+    nt = (int)(nb / sizeof(uint64_t));
+    /*
+     * Loop through the threads.
+     */
+    for (i = 0; i < nt; i++) {
+        uint64_t t;
+        struct proc_threadinfo ti;
+        
+        t = Threads[i];
+
+        nb = proc_pidinfo(pid, PROC_PIDTHREADINFO, t, &ti,
+                          sizeof(ti));
+
+        if (nb <= 0) {
+            if ((errno == ESRCH) || (errno == EINVAL)) {
+             
+                printf("No more thread info available for pid: %i\n", pid);
+                
+                //
+                // Quit if no more thread information is available for the
+                // process.
+                //
+                return;
+            }
+        }
+        else if (nb < sizeof(ti)) {
+            (void) fprintf(stderr,
+                           "%s: PID %d: proc_pidinfo(PROC_PIDTHREADINFO);\n",
+                           Pn, pid);
+            (void) fprintf(stderr,
+                           "      too few bytes; expected %ld, got %d\n",
+                           sizeof(ti), nb);
+            return;
+        }
+        else if (nb == sizeof(ti)) {
+            *p += (ti.pth_run_state == TH_STATE_RUNNING);
+            
+            //if (ti.pth_run_state == TH_STATE_RUNNING)
+            //    printf("pid %i: GOT RUNNING\n", pid);
+        }
+        else {
+            /* We should never hit this */
+            printf("We are hopeless here!\n");
+        }
+        
+        /*
+        uint64_t t;
+        struct proc_threadwithpathinfo tpi;
+        
+        t = Threads[i];
+        nb = proc_pidinfo(pid, PROC_PIDTHREADPATHINFO, t, &tpi,
+                          sizeof(tpi));
+        
+        if (nb <= 0) {
+            if ((errno == ESRCH) || (errno == EINVAL)) {
+                
+                //
+                // Quit if no more thread information is available for the
+                // process.
+                //
+                return;
+            }
+            //
+            // Warn about all other errors via a NAME column message.
+            //
+            alloc_lfile(TWD, -1);
+            Cfp = (struct file *)NULL;
+            (void) snpf(Namech, Namechl,
+                        "thread info error: %s", strerror(errno));
+            Namech[Namechl - 1] = '\0';
+            enter_nm(Namech);
+            if (Lf->sf)
+                link_lfile();
+                return;
+        } else if (nb < sizeof(tpi)) {
+            (void) fprintf(stderr,
+                           "%s: PID %d: proc_pidinfo(PROC_PIDTHREADPATHINFO);\n",
+                           Pn, pid);
+            (void) fprintf(stderr,
+                           "      too few bytes; expected %ld, got %d\n",
+                           sizeof(tpi), nb);
+            Exit(1);
+        }
+         */
+        /*
+        if (tpi.pvip.vip_path[0]) {
+            alloc_lfile(TWD, -1);
+            Cfp = (struct file *)NULL;
+            (void) enter_vnode_info(&tpi.pvip);
+            if (Lf->sf)
+                link_lfile();
+                }
+         */
+    }
 }
 
 int update_running_threads(void)
 {
-    /*
-     *  From looking top-108 source I saw that there is difference between total and running threads!
-     *
-     */
+    printf("Update running threads start----------------------\n");
     
-    // NOT IMPLEMENTED
+    int run_threads = 0;
     
+    int err = 0;
+    struct kinfo_proc *p = NULL;
+    size_t length = 0;
+    
+    static const int name[] = { CTL_KERN, KERN_PROC, KERN_PROC_ALL, 0 };
+    
+    // Call sysctl with a NULL buffer to get proper length
+    err = sysctl((int *)name, (sizeof(name) / sizeof(*name)) - 1, NULL, &length, NULL, 0);
+    if (err) {
+        perror(NULL);
+        return 0;
+    }
+    
+    // Allocate buffer
+    p = (kinfo_proc*)malloc(length);
+    if (!p) {
+        perror(NULL);
+        return 0;
+    }
+    
+    // Get the actual process list
+    err = sysctl((int *)name, (sizeof(name) / sizeof(*name)) - 1, p, &length, NULL, 0);
+    if (err)
+    {
+        perror(NULL);
+        free(p);
+        return 0;
+    }
+    
+    int proc_count = length / sizeof(struct kinfo_proc);
+    
+    for (int i = 0; i < proc_count; i++) {
+        int cnt = 0;
+        
+        /*
+         *  We need to pass the number of threads WE BELIEVE the process may be using.
+         *  Lets say that the process is using 10, and leave the function to set the number for us
+         *
+         *  NOTE: 10 is used by ME as an average value that wont be too big, and wont be too small to allow the function to run faster.
+         */
+        // TODO: Replace the code to find the PIDs with proc_* functions in order to get access to tai.ptinfo.pti_threadnum and replace number 10 with that.
+        
+        process_threads( (uint32_t)p[i].kp_proc.p_pid, 10, (uint32_t *)&cnt); // run_threads += get_runthreads_for_pid(p[i].kp_proc.p_pid);
+        run_threads += cnt;
+    }
+    
+    info.run_threads = run_threads;
+    
+    printf("Update running threads end----------------------\n\n");
+    
+    free(p);
+    return 0;
+}
+
+int update_running_threads_NOT_READY(void)    /* TODO: Fix this function */
+{
+    int run_threads = 0;
+
+    struct proc_taskallinfo *p = NULL;
+    size_t length = 0;
+    
+    update_total_processes();
+    int proc_count = info.procs;
+    length = proc_count * sizeof(proc_taskallinfo);
+    
+    // Allocate buffer
+    p = (proc_taskallinfo*)malloc(length);
+    if (!p) {
+        perror(NULL);
+        return 0;
+    }
+    
+    int proc_result = proc_listallpids( p, proc_count );
+    
+    if (proc_result != proc_count)
+    {
+        printf("proc_result = %i while expected %d\n", proc_result, proc_count);
+        //return 0;   // error -- TODO: handle each error later
+    }
+    
+    for (int i = 0; i < proc_count; i++) {
+        int cnt = 0;
+        
+        //
+        //  TODO: Add code for getting threadnum
+        //
+        
+        process_threads( p[i].pbsd.pbi_pid, p[i].ptinfo.pti_threadnum, (uint32_t *)&cnt); // run_threads += get_runthreads_for_pid(p[i].kp_proc.p_pid);
+        run_threads += cnt;
+    }
+    
+    info.run_threads = run_threads;
+    
+    printf("Update running threads end----------------------\n\n");
+    
+    free(p);
     return 0;
 }
 
@@ -433,6 +680,12 @@ int update_total_processes(void)
 
 int update_running_processes(void)
 {
+    /*
+     *  I think we can: 1) get list of pids
+     *                  2) check if the process has any thread that has state = TH_STATE_RUNNING
+     *                  3) if YES, it means that the process is running, if NOT then the process is not running
+     */
+    
     int err = 0;
     struct kinfo_proc *p = NULL;
     size_t length = 0;
@@ -440,11 +693,9 @@ int update_running_processes(void)
     static const int name[] = { CTL_KERN, KERN_PROC, KERN_PROC_ALL, 0 };
     
     // Call sysctl with a NULL buffer to get proper length
-    
     err = sysctl((int *)name, (sizeof(name) / sizeof(*name)) - 1, NULL, &length, NULL, 0);
     if (err) {
         perror(NULL);
-        free(p);
         return 0;
     }
     
@@ -452,7 +703,6 @@ int update_running_processes(void)
     p = (kinfo_proc*)malloc(length);
     if (!p) {
         perror(NULL);
-        free(p);
         return 0;
     }
     
@@ -470,8 +720,23 @@ int update_running_processes(void)
     int run_procs = 0;
     
     for (int i = 0; i < proc_count; i++) {
-        if (p[i].kp_proc.p_stat == SRUN)
+        if (p[i].kp_proc.p_stat == SRUN)    // This method doesnt work!
             run_procs++;
+        
+        /*
+         Implementation:
+         
+         int cnt = 0;
+         int numthreads = 0;
+         
+         //
+         // TODO: add proc_* for getting numthreads
+         //
+         
+         process_threads(pid, numthreads, &cnt);
+         if (cnt != 0)
+             run_procs++;
+         */
     }
     
     info.run_procs = run_procs;
@@ -508,7 +773,7 @@ void get_cpu_count(void)
         CRIT_ERR(NULL, NULL, "malloc");
     }
     
-    printf( "get_cpu_count: %i\n", info.cpu_count );
+    printf("get_cpu_count: %i\n", info.cpu_count);
 }
 
 
@@ -995,23 +1260,13 @@ void print_sip_status(struct text_object *obj, char *p, int p_max_size)
     
     if (strlen(obj->data.s) == 0)
     {
-        snprintf(p, p_max_size, "%s", "error unsupported" );
+        snprintf(p, p_max_size, "%s", "error unsupported");
     }
     else if(strlen(obj->data.s) == 1)
     {
         switch (obj->data.s[0])
         {
-            case '0':
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9':
-            case 'a':
+            case '0':case '1':case '2':case '3':case '4':case '5':case '6':case '7':case '8':case '9':case 'a':
                 snprintf(p, p_max_size, "%s", "error unsupported");        
                 break;
             default:
