@@ -36,37 +36,41 @@
  *      GCD!
  */
 
-#include <dispatch/dispatch.h>
+#include <semaphore.h>
+
+//#include <dispatch/dispatch.h>
 
 class semaphore {
-  dispatch_semaphore_t sem;
+	sem_t sem;
+	
+/*  dispatch_semaphore_t sem; */
 
   semaphore(const semaphore &) = delete;
   semaphore &operator=(const semaphore &) = delete;
 
  public:
   semaphore(unsigned int value = 0) {
-    sem = dispatch_semaphore_create(value);
+    /*sem = dispatch_semaphore_create(value)*/
 
-    if (!sem) throw std::logic_error(strerror(errno));
+//    if (!sem) throw std::logic_error(strerror(errno));
   }
 
-  ~semaphore() { dispatch_release(sem); }
-  void post() { dispatch_semaphore_signal(sem); }
+  ~semaphore() {/*dispatch_release(sem);*/ }
+  void post() { /*dispatch_semaphore_signal(sem);*/ }
 
-  void wait() { dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER); }
+  void wait() { /*dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);*/ }
 
   bool trywait() {
     /* XXX Quick patch */
 #define DISPATCH_EAGAIN 49
 
-    int ret = dispatch_semaphore_wait(sem, DISPATCH_TIME_NOW);
+    int ret /*= dispatch_semaphore_wait(sem, DISPATCH_TIME_NOW)*/;
 
     while (ret > 0) {
       if (ret == DISPATCH_EAGAIN)
         return false;
-      else if (errno != EINTR)
-        abort();
+//      else if (errno != EINTR)
+//        abort();
     }
     return true;
   }

@@ -27,6 +27,9 @@
  *
  */
 
+// (npyl): Leopard
+#include <sys/socket.h>
+
 #include <fcntl.h>
 #include <net/if.h>
 #include <netinet/in.h>
@@ -85,7 +88,7 @@ void strfold(char *start, int count) {
 // use our own strndup() if it's not available
 char *strndup(const char *s, size_t n) {
   if (strlen(s) > n) {
-    char *ret = malloc(n + 1);
+    char *ret = (char *)malloc(n + 1);
     strncpy(ret, s, n);
     ret[n] = 0;
     return ret;

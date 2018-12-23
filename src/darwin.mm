@@ -42,6 +42,12 @@
  *is available. patched the _csr_check function to return the bool bit instead.
  */
 
+#define vm_statistics64_data_t vm_statistics_data_t
+#define HOST_VM_INFO64 HOST_VM_INFO
+#define host_info64_t host_info_t
+#define host_statistics64 host_statistics
+#define __block 
+
 #include "conky.h"  // for struct info
 #include "darwin.h"
 
@@ -59,7 +65,7 @@
 
 #include <mach/mach.h>  // update_total_processes
 
-#include <dispatch/dispatch.h>  // get_top_info
+//#include <dispatch/dispatch.h>  // get_top_info
 #include <libproc.h>            // get_top_info
 #include "top.h"                // get_top_info
 
@@ -1243,21 +1249,21 @@ static void get_top_info_for_kinfo_proc(struct kinfo_proc *p) {
     __block bool calc_cpu_total_finished = false;
     __block bool calc_proc_total_finished = false;
 
-    dispatch_async(
-        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//    dispatch_async(
+//        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
           /* calc CPU time for process */
           calc_cpu_time_for_proc(proc, &pti);
 
           calc_proc_total_finished = true;
-        });
+//        });
 
-    dispatch_async(
-        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//    dispatch_async(
+//        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
           /* calc total CPU time (considering current process) */
           calc_cpu_total(proc, &t);
 
-          calc_cpu_total_finished = true;
-        });
+//          calc_cpu_total_finished = true;
+//        });
 
     /*
      * wait until done
@@ -1349,15 +1355,15 @@ void fill_csr_config_flags_struct() {
  *  Get SIP configuration   ( sets csr_config and csr_config_flags )
  */
 int get_sip_status() {
-  if (csr_get_active_config ==
-      nullptr) /*  check if weakly linked symbol exists    */
+//  if (csr_get_active_config ==
+//      nullptr) /*  check if weakly linked symbol exists    */
   {
-    NORM_ERR("$sip_status will not work on this version of macOS\n");
+//    NORM_ERR("$sip_status will not work on this version of macOS\n");
     return 0;
   }
 
-  csr_get_active_config(&info.csr_config);
-  fill_csr_config_flags_struct();
+//  csr_get_active_config(&info.csr_config);
+//  fill_csr_config_flags_struct();
 
   return 0;
 }
@@ -1391,11 +1397,11 @@ int get_sip_status() {
  *  this is wrong.
  */
 void print_sip_status(struct text_object *obj, char *p, unsigned int p_max_size) {
-  if (csr_get_active_config ==
-      nullptr) /*  check if weakly linked symbol exists    */
+  //if (csr_get_active_config ==
+  //    nullptr) /*  check if weakly linked symbol exists    */
   {
     snprintf(p, p_max_size, "%s", "unsupported");
-    NORM_ERR("$sip_status will not work on this version of macOS\n");
+    //NORM_ERR("$sip_status will not work on this version of macOS\n");
     return;
   }
 

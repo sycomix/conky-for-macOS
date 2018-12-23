@@ -59,6 +59,14 @@
 
 #include "update-cb.hh"
 
+// (npyl): Leopard
+// Use this if strnlen is missing.
+size_t strnlen(const char *str, size_t max)
+{
+    const char *end = (const char *)memchr (str, 0, max);
+    return end ? (size_t)(end - str) : max;
+}
+
 struct local_mail_s {
   char *mbox;
   int mail_count;
