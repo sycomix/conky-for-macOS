@@ -2,10 +2,25 @@
 
 [![Build Status](https://travis-ci.org/brndnmtthws/conky.png)](https://travis-ci.org/brndnmtthws/conky) [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=conky&metric=alert_status)](https://sonarcloud.io/dashboard/index/conky)
 
+## THE SPRINT OF THE LEO 🐆
+
 **Conky** is a free, light-weight system monitor for X, that displays
 any kind of information on your desktop.
 
 Grab the [latest release from GitHub](https://github.com/brndnmtthws/conky/releases/latest).
+
+### About the _Leopard_ branch
+
+This branch contains patches for building conky v1.11.1 on an OSX Leopard 10.5+ installation. <br>
+Make sure you read up [this](https://npyl.github.io/emerald/Leopards-still-rock) post I wrote about the process.  You will have some fun reading it, I guess.<br>
+
+(It should work from `Tiger` up until `Mojave`.  Please test and give [me](mailto:pylarinosnick@gmail.com) feedback of your experience if you'd like :))<br>
+
+**LE GUIDE IS COMING SOON**<br>
+
+For the weary, there is a precompiled 10.5.2 [binary](https://github.com/Conky-for-macOS/conky-for-macOS/releases/tag/v1.11.1_leopard_alpha).  (Remember: at this version OSX was quite unstable in everything, thus the binary may or may not work.)
+
+<p align="center"><img src="https://npyl.github.io/img/it_works.png"></p>
 
 ### Features
 
