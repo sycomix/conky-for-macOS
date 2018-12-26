@@ -34,7 +34,7 @@
 #include <net/if.h>
 #include <netinet/in.h>
 #include <pthread.h>
-#include <semaphore.h>
+//#include <semaphore.h>	// XXX is this really needed anymore?
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <cctype>

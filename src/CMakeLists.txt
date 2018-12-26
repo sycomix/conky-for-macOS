@@ -73,6 +73,8 @@ set(conky_sources
   llua.cc llua.h
   update-cb.cc update-cb.hh
   logging.h
+	darwin_semaphore.hh
+	darwin_semaphore.cc
   semaphore.hh
 )
 
