@@ -1,0 +1,1141 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		5E779A40B18E4C04BC670946 /* package */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 439385DB01144BBBB921674D /* Build configuration list for PBXAggregateTarget "package" */;
+			buildPhases = (
+				3AC317B4D5844AD0801C9792 /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				748F177A57E04DC88CB6BA66 /* PBXTargetDependency */,
+			);
+			name = package;
+			productName = package;
+		};
+		5EFF2921EC804CA8AC55963E /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 792E610EE5F545EFABF3F22A /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				A13D5D35DE754298B1E6AA3B /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				7800CFB0A58041509E020BC4 /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+		68A757928D2C4F75B7F8C8CE /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 12C9D99ACA574F7587C400AA /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				78BEF9192AED43CC970E81B8 /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		E3E9932D3DC344C1B7994EC2 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = FC46AD9F0F2C422C8706163A /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				1892E1FBADD242AE98637CF8 /* CMake Rules */,
+			);
+			dependencies = (
+				619850F97BF8431586EE4B17 /* PBXTargetDependency */,
+				F5DA494B94BB40BF9718D033 /* PBXTargetDependency */,
+				E1BD5E98CB9645189AFE02F1 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		020CC908438F4DF981930C96 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_to.c */ = {isa = PBXBuildFile; fileRef = 88E32B722AD04835B9F9547E /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_to.c */; };
+		48A91DAAD98540669618B4E8 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_map.c */ = {isa = PBXBuildFile; fileRef = 1B3D1B4FC6C644528096CC9F /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_map.c */; };
+		492F436CFE994F478A00C43A /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 748C9080F8E344B886048B35 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/CMakeLists.txt */; };
+		5A64D018FB2F4E90BC1ED94A /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_is.c */ = {isa = PBXBuildFile; fileRef = 1A31E3877FAE419681D9540F /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_is.c */; };
+		A84D1981F2F64EE3BB3258B9 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin/tolua.c */ = {isa = PBXBuildFile; fileRef = 6E5E96BB5CDB403AA62F2BA3 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin/tolua.c */; };
+		CFBCB221FA4E4CBCBA05F158 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin/toluabind.c */ = {isa = PBXBuildFile; fileRef = EC5D7F8B744545FDB6D85272 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin/toluabind.c */; };
+		D6338C2B05864F4BADDF2571 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_push.c */ = {isa = PBXBuildFile; fileRef = E475AB44911C48CF92C34067 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_push.c */; };
+		D90034CF36BC4842B150B989 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_event.c */ = {isa = PBXBuildFile; fileRef = A7888782356642C4B13D54C8 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_event.c */; };
+		F61BC0DCA376485BA19CB461 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 091A2F94CDAC4473B62FFF80 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/CMakeLists.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		266096F60B964EE38B729630 /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+		2A8CD12867B143128774E5BD /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+		2F419F3393E54028A530C1BA /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		C6748E3A169342C0829C8F07 /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		29A726FA6C16497BB7406CB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 058C3425F1C3400FB660F765 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E3E9932D3DC344C1B7994EC2;
+			remoteInfo = ALL_BUILD;
+		};
+		2D02F88137304E73B57492C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 058C3425F1C3400FB660F765 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE1FE5324F6F43FC8E390D38;
+			remoteInfo = toluapp_lib_static;
+		};
+		5A77F9081983456B90EACA68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 058C3425F1C3400FB660F765 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68A757928D2C4F75B7F8C8CE;
+			remoteInfo = ZERO_CHECK;
+		};
+		8A6486317BC04300A3A11697 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 058C3425F1C3400FB660F765 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68A757928D2C4F75B7F8C8CE;
+			remoteInfo = ZERO_CHECK;
+		};
+		B2F2FFD2AB3C4A4FA785C9E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 058C3425F1C3400FB660F765 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E3E9932D3DC344C1B7994EC2;
+			remoteInfo = ALL_BUILD;
+		};
+		B6A29CB065FA425E8FF864B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 058C3425F1C3400FB660F765 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE1FE5324F6F43FC8E390D38;
+			remoteInfo = toluapp_lib_static;
+		};
+		D388FF124EC64821BCE6B02F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 058C3425F1C3400FB660F765 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68A757928D2C4F75B7F8C8CE;
+			remoteInfo = ZERO_CHECK;
+		};
+		E1C79A874B204186A6AF78D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 058C3425F1C3400FB660F765 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5FB0BF6F3C2E4487A1443D70;
+			remoteInfo = toluapp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		091A2F94CDAC4473B62FFF80 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		1A31E3877FAE419681D9540F /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_is.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = tolua_is.c; path = src/lib/tolua_is.c; sourceTree = SOURCE_ROOT; };
+		1B3D1B4FC6C644528096CC9F /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_map.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = tolua_map.c; path = src/lib/tolua_map.c; sourceTree = SOURCE_ROOT; };
+		43B146FCDB514C02ACF05453 /* toluapp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = toluapp; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E5E96BB5CDB403AA62F2BA3 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin/tolua.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = tolua.c; path = src/bin/tolua.c; sourceTree = SOURCE_ROOT; };
+		748C9080F8E344B886048B35 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		88E32B722AD04835B9F9547E /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_to.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = tolua_to.c; path = src/lib/tolua_to.c; sourceTree = SOURCE_ROOT; };
+		A7888782356642C4B13D54C8 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_event.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = tolua_event.c; path = src/lib/tolua_event.c; sourceTree = SOURCE_ROOT; };
+		B059182F96124FBFAB1967C9 /* toluapp_lib_static */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libtoluapp.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E475AB44911C48CF92C34067 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_push.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = tolua_push.c; path = src/lib/tolua_push.c; sourceTree = SOURCE_ROOT; };
+		EC5D7F8B744545FDB6D85272 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin/toluabind.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = toluabind.c; path = src/bin/toluabind.c; sourceTree = SOURCE_ROOT; };
+		EFBC3667A82F4DE790C8389C /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		19CF99C18FA24644851FB529 = {
+			isa = PBXGroup;
+			children = (
+				E3F0230937334C62963AACAB /* toluapp */,
+				2295B475B3F24417A1996580 /* toluapp_lib_static */,
+				24D073442A0B4564BCBA7875 /* ALL_BUILD */,
+				98B2D1CFE0524D7A8A7DEA19 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2295B475B3F24417A1996580 /* toluapp_lib_static */ = {
+			isa = PBXGroup;
+			children = (
+				C58D9E68AECE4F8899A85996 /* Source Files */,
+				748C9080F8E344B886048B35 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/CMakeLists.txt */,
+			);
+			name = toluapp_lib_static;
+			sourceTree = "<group>";
+		};
+		24D073442A0B4564BCBA7875 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				3BFBC52DB2E34060A7B50F04 /* CMake Rules */,
+				EFBC3667A82F4DE790C8389C /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		3BFBC52DB2E34060A7B50F04 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		6B36A89252C440BBA6DFC46E /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E5E96BB5CDB403AA62F2BA3 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin/tolua.c */,
+				EC5D7F8B744545FDB6D85272 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin/toluabind.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		98B2D1CFE0524D7A8A7DEA19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				43B146FCDB514C02ACF05453 /* toluapp */,
+				B059182F96124FBFAB1967C9 /* toluapp_lib_static */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C58D9E68AECE4F8899A85996 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7888782356642C4B13D54C8 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_event.c */,
+				1A31E3877FAE419681D9540F /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_is.c */,
+				1B3D1B4FC6C644528096CC9F /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_map.c */,
+				E475AB44911C48CF92C34067 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_push.c */,
+				88E32B722AD04835B9F9547E /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_to.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		E3F0230937334C62963AACAB /* toluapp */ = {
+			isa = PBXGroup;
+			children = (
+				6B36A89252C440BBA6DFC46E /* Source Files */,
+				091A2F94CDAC4473B62FFF80 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/CMakeLists.txt */,
+			);
+			name = toluapp;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5FB0BF6F3C2E4487A1443D70 /* toluapp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 821B017569F5416287FF9E05 /* Build configuration list for PBXNativeTarget "toluapp" */;
+			buildPhases = (
+				71DFF89F52F64634881B5806 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB85D70A6E12412FA86FDEEA /* PBXTargetDependency */,
+				D89A9A2AAF5241ECA89F3542 /* PBXTargetDependency */,
+			);
+			name = toluapp;
+			productName = toluapp;
+			productReference = 43B146FCDB514C02ACF05453 /* toluapp */;
+			productType = "com.apple.product-type.tool";
+		};
+		AE1FE5324F6F43FC8E390D38 /* toluapp_lib_static */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F45D8BAC8A54917B88BEBBE /* Build configuration list for PBXNativeTarget "toluapp_lib_static" */;
+			buildPhases = (
+				0392A7F57C4B4BDFA9557EB3 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				13C95A35B3D34FAF930EDC31 /* PBXTargetDependency */,
+			);
+			name = toluapp_lib_static;
+			productName = toluapp_lib_static;
+			productReference = B059182F96124FBFAB1967C9 /* toluapp_lib_static */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		058C3425F1C3400FB660F765 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1010;
+			};
+			buildConfigurationList = 0AFCE29D5F06407DBE66FD65 /* Build configuration list for PBXProject "toluapp" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				2F419F3393E54028A530C1BA /* Debug */,
+				2A8CD12867B143128774E5BD /* Release */,
+				C6748E3A169342C0829C8F07 /* MinSizeRel */,
+				266096F60B964EE38B729630 /* RelWithDebInfo */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 19CF99C18FA24644851FB529;
+			projectDirPath = ../../../3rdparty/toluapp;
+			projectRoot = "";
+			targets = (
+				E3E9932D3DC344C1B7994EC2 /* ALL_BUILD */,
+				68A757928D2C4F75B7F8C8CE /* ZERO_CHECK */,
+				5EFF2921EC804CA8AC55963E /* install */,
+				5E779A40B18E4C04BC670946 /* package */,
+				5FB0BF6F3C2E4487A1443D70 /* toluapp */,
+				AE1FE5324F6F43FC8E390D38 /* toluapp_lib_static */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		061A903DD3A84BD29F46C461 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		1892E1FBADD242AE98637CF8 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp -f /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		3AC317B4D5844AD0801C9792 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp -f /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/CMakeScripts/package_postBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		5AA6D40695834A478012D716 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		78BEF9192AED43CC970E81B8 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp -f /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		8533CC903FEE49659AB15B2B = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		A13D5D35DE754298B1E6AA3B /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp -f /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/CMakeScripts/install_postBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		DA91E0FAB29241B0A331D012 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0392A7F57C4B4BDFA9557EB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D90034CF36BC4842B150B989 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_event.c */,
+				5A64D018FB2F4E90BC1ED94A /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_is.c */,
+				48A91DAAD98540669618B4E8 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_map.c */,
+				D6338C2B05864F4BADDF2571 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_push.c */,
+				020CC908438F4DF981930C96 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib/tolua_to.c */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71DFF89F52F64634881B5806 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A84D1981F2F64EE3BB3258B9 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin/tolua.c */,
+				CFBCB221FA4E4CBCBA05F158 /* /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin/toluabind.c */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		13C95A35B3D34FAF930EDC31 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68A757928D2C4F75B7F8C8CE /* ZERO_CHECK */;
+			targetProxy = D388FF124EC64821BCE6B02F /* PBXContainerItemProxy */;
+		};
+		619850F97BF8431586EE4B17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5FB0BF6F3C2E4487A1443D70 /* toluapp */;
+			targetProxy = E1C79A874B204186A6AF78D5 /* PBXContainerItemProxy */;
+		};
+		748F177A57E04DC88CB6BA66 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E3E9932D3DC344C1B7994EC2 /* ALL_BUILD */;
+			targetProxy = 29A726FA6C16497BB7406CB7 /* PBXContainerItemProxy */;
+		};
+		7800CFB0A58041509E020BC4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E3E9932D3DC344C1B7994EC2 /* ALL_BUILD */;
+			targetProxy = B2F2FFD2AB3C4A4FA785C9E9 /* PBXContainerItemProxy */;
+		};
+		D89A9A2AAF5241ECA89F3542 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68A757928D2C4F75B7F8C8CE /* ZERO_CHECK */;
+			targetProxy = 8A6486317BC04300A3A11697 /* PBXContainerItemProxy */;
+		};
+		DB85D70A6E12412FA86FDEEA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE1FE5324F6F43FC8E390D38 /* toluapp_lib_static */;
+			targetProxy = 2D02F88137304E73B57492C8 /* PBXContainerItemProxy */;
+		};
+		E1BD5E98CB9645189AFE02F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68A757928D2C4F75B7F8C8CE /* ZERO_CHECK */;
+			targetProxy = 5A77F9081983456B90EACA68 /* PBXContainerItemProxy */;
+		};
+		F5DA494B94BB40BF9718D033 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE1FE5324F6F43FC8E390D38 /* toluapp_lib_static */;
+			targetProxy = B6A29CB065FA425E8FF864B7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		092051EBEAB14DAAB98979B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk;
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/build";
+			};
+			name = Debug;
+		};
+		0E10AD3141504CD08E0CD0D4 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = package;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		1D996F8D2FA54E3CB4C665F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		2B456BF4821A4218B68CF303 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk;
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/build";
+			};
+			name = RelWithDebInfo;
+		};
+		2EA00B2324334631AFED7AF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk;
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/build";
+			};
+			name = Release;
+		};
+		379DEE44E93B495981D7F594 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = package;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		3B8CB6C1850A4B509C658B9D /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		3DF2F4FA296449D4A82A5806 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		3E9B0B3536F24E27A89B80DF /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/include","/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib",/usr/local/include/lua,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin");
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = " /usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME) /usr/local/lib";
+				OTHER_CFLAGS = "-std=c99        -DNDEBUG  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/RelWithDebInfo/libtoluapp.a -llua -lm";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = toluapp;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		4E684D32A18845FA865A3745 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		4F8AB9B84175497D82D1505D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		5CFF0690B56E472DBF6D6E87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/include","/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib",/usr/local/include/lua,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-std=c99     -DNDEBUG -fPIC  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = toluapp;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		5FBF7E13F789482A9273D8EF /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		71725286CF8648EE87286499 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/include","/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib",/usr/local/include/lua,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin");
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = " /usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME) /usr/local/lib";
+				OTHER_CFLAGS = "-std=c99     ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/Debug/libtoluapp.a -llua -lm";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = toluapp;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		747863B20E4A416F8576B00C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		7F048C41A4A84788891C8412 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/include","/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib",/usr/local/include/lua,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-std=c99    -fPIC  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = toluapp;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		7FA336F029EB46748321E7ED /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk;
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/build";
+			};
+			name = MinSizeRel;
+		};
+		954E3F7955B044778B2CE486 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/include","/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib",/usr/local/include/lua,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-std=c99     -DNDEBUG -fPIC  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = toluapp;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		B3E552CF68A44DEDBCE98A54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/include","/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib",/usr/local/include/lua,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin");
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = " /usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME) /usr/local/lib";
+				OTHER_CFLAGS = "-std=c99     -DNDEBUG  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/Release/libtoluapp.a -llua -lm";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = toluapp;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		BADCBDC9C43A43F3BCA76021 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		C729B630E352427382AFB221 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = package;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		D83CEBCFA5FB4703B928B3B5 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		DF415C23107E457F8E0A07A1 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/include","/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib",/usr/local/include/lua,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin");
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = " /usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME) /usr/local/lib";
+				OTHER_CFLAGS = "-std=c99     -DNDEBUG  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp/MinSizeRel/libtoluapp.a -llua -lm";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = toluapp;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		E1066536BB96406A9551768A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = package;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		E8DA4EE0FDEC4EC3ADD55CEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		EEFBF7ABC9FA40A1BE0ED2DC /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		F59E01ED7FCE47B4AC559BFF /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		F6BE6D75EDAE493EB1EC25F6 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (/usr/local/include,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/include","/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/lib",/usr/local/include/lua,"/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/3rdparty/toluapp/src/bin");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "-std=c99        -DNDEBUG -fPIC  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = toluapp;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/npyl/Manage-Conky/ConkyX/conky-for-macOS/forConkyX/3rdparty/toluapp";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0AFCE29D5F06407DBE66FD65 /* Build configuration list for PBXProject "toluapp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				092051EBEAB14DAAB98979B0 /* Debug */,
+				2EA00B2324334631AFED7AF1 /* Release */,
+				7FA336F029EB46748321E7ED /* MinSizeRel */,
+				2B456BF4821A4218B68CF303 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		12C9D99ACA574F7587C400AA /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BADCBDC9C43A43F3BCA76021 /* Debug */,
+				3DF2F4FA296449D4A82A5806 /* Release */,
+				EEFBF7ABC9FA40A1BE0ED2DC /* MinSizeRel */,
+				F59E01ED7FCE47B4AC559BFF /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		439385DB01144BBBB921674D /* Build configuration list for PBXAggregateTarget "package" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				379DEE44E93B495981D7F594 /* Debug */,
+				E1066536BB96406A9551768A /* Release */,
+				0E10AD3141504CD08E0CD0D4 /* MinSizeRel */,
+				C729B630E352427382AFB221 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5F45D8BAC8A54917B88BEBBE /* Build configuration list for PBXNativeTarget "toluapp_lib_static" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F048C41A4A84788891C8412 /* Debug */,
+				5CFF0690B56E472DBF6D6E87 /* Release */,
+				954E3F7955B044778B2CE486 /* MinSizeRel */,
+				F6BE6D75EDAE493EB1EC25F6 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		792E610EE5F545EFABF3F22A /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8DA4EE0FDEC4EC3ADD55CEA /* Debug */,
+				4F8AB9B84175497D82D1505D /* Release */,
+				4E684D32A18845FA865A3745 /* MinSizeRel */,
+				D83CEBCFA5FB4703B928B3B5 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		821B017569F5416287FF9E05 /* Build configuration list for PBXNativeTarget "toluapp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71725286CF8648EE87286499 /* Debug */,
+				B3E552CF68A44DEDBCE98A54 /* Release */,
+				DF415C23107E457F8E0A07A1 /* MinSizeRel */,
+				3E9B0B3536F24E27A89B80DF /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FC46AD9F0F2C422C8706163A /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D996F8D2FA54E3CB4C665F2 /* Debug */,
+				747863B20E4A416F8576B00C /* Release */,
+				3B8CB6C1850A4B509C658B9D /* MinSizeRel */,
+				5FBF7E13F789482A9273D8EF /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 058C3425F1C3400FB660F765 /* Project object */;
+}
