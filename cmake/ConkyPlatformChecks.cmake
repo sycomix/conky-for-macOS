@@ -154,10 +154,16 @@ if(BUILD_MATH)
 endif(BUILD_MATH)
 
 if(BUILD_ICAL)
-  check_include_files(libical/ical.h ICAL_H_)
-  if(NOT ICAL_H_)
+  find_library(ICAL_LIB NAMES ical PATHS
+    /usr/local/opt/libical/lib
+    /usr/lib
+    /usr/local/lib
+    /usr/local/opt/lib
+    )
+
+  if(NOT ICAL_LIB)
     message(FATAL_ERROR "Unable to find libical")
-  endif(NOT ICAL_H_)
+  endif(NOT ICAL_LIB)
   set(conky_libs ${conky_libs} -lical)
 endif(BUILD_ICAL)
 
