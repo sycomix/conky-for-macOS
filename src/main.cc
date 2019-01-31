@@ -35,6 +35,10 @@
 #include "conky.h"
 #include "lua-config.hh"
 
+#include <dlfcn.h>
+#include <vector>
+#include <dirent.h>
+
 #ifdef BUILD_X11
 #include "x11.h"
 #endif /* BUILD_X11 */
@@ -266,6 +270,101 @@ inline void reset_optind() {
 #endif
 }
 
+static std::vector<void *> plugin_handles;
+
+static void _mkdir(const char *dir) {
+  char tmp[256];
+  char *p = NULL;
+  size_t len;
+  
+  snprintf(tmp, sizeof(tmp),"%s",dir);
+  len = strlen(tmp);
+  if(tmp[len - 1] == '/')
+    tmp[len - 1] = 0;
+  for(p = tmp + 1; *p; p++)
+    if(*p == '/') {
+      *p = 0;
+      mkdir(tmp, S_IRWXU);
+      *p = '/';
+    }
+  mkdir(tmp, S_IRWXU);
+}
+
+std::string conky_plugins_path() {
+  return (std::string(getenv("HOME")) + "/.conky/plugins");
+}
+
+std::vector<std::string> plugins_at_path(std::string path) {
+  std::vector<std::string> files;
+  
+  DIR *dp;
+  struct dirent *dirp;
+  if((dp  = opendir(path.c_str())) == NULL) {
+    perror("opendir");
+    return std::vector<std::string>();
+  }
+  
+  while ((dirp = readdir(dp)) != NULL) {
+    std::string name = dirp->d_name;
+    
+    if (name == ".")
+      continue;
+    if (name == "..")
+      continue;
+    
+    if (name.substr(name.length() - 3, name.length()) != ".so")
+      continue;
+    
+    printf("adding plugin (%s)\n", name.c_str());
+    
+    files.push_back(name);
+  }
+  
+  closedir(dp);
+  
+  return files;
+}
+
+void load_conky_plugins() {
+  std::string path = conky_plugins_path();
+  
+  /* create plugins directory if it doesn't exist */
+  if (access(path.c_str(), F_OK) != 0) {
+    printf("plugins directory doesn't exist; creating it.\n");
+    _mkdir(path.c_str());
+  }
+  
+  printf("searching for plugins at (%s)\n", path.c_str());
+  
+  void *plugin_handle = nullptr;
+  void (*plugin_main)(void) = nullptr;
+  
+  for (std::string plugin : plugins_at_path(path)) {
+    plugin_handle = dlopen(plugin.c_str(), RTLD_LAZY);
+    
+    if(!plugin_handle) {
+      perror("dlopen");
+      continue;
+    }
+    
+    plugin_handles.push_back(plugin_handle);
+    
+    if (!dlsym(&plugin_main, "plugin_main")) {
+      perror("dlsym");
+      continue;
+    }
+    
+    /* call plugin main */
+    plugin_main();
+  }
+}
+
+void unload_conky_plugins() {
+  for (void *plugin_handle : plugin_handles) {
+    dlclose(plugin_handle);
+  }
+}
+
 int main(int argc, char **argv) {
 #ifdef BUILD_I18N
   setlocale(LC_ALL, "");
@@ -335,7 +434,12 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
   }
-
+  
+  /* Load Plugins */
+  load_conky_plugins();
+  
+  printf("plugins loaded: %lu\n", plugin_handles.size());
+  
   try {
     set_current_config();
 
@@ -370,5 +474,8 @@ int main(int argc, char **argv) {
 #ifdef LEAKFREE_NCURSES
   _nc_free_and_exit(0);  // hide false memleaks
 #endif
+  
+  unload_conky_plugins();
+  
   return 0;
 }
