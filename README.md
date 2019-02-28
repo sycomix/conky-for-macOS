@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/brndnmtthws/conky.svg?branch=master)](https://travis-ci.org/brndnmtthws/conky) [![pipeline status](https://gitlab.com/brndnmtthws-oss/conky/badges/master/pipeline.svg)](https://gitlab.com/brndnmtthws-oss/conky/commits/master) [![coverage report](https://gitlab.com/brndnmtthws-oss/conky/badges/master/coverage.svg)](https://gitlab.com/brndnmtthws-oss/conky/commits/master)
+[![Build Status](https://travis-ci.com/Conky-for-macOS/conky-for-macOS.svg?branch=forConkyX)](https://travis-ci.com/Conky-for-macOS/conky-for-macOS) [![pipeline status](https://gitlab.com/brndnmtthws-oss/conky/badges/master/pipeline.svg)](https://gitlab.com/brndnmtthws-oss/conky/commits/master) [![coverage report](https://gitlab.com/brndnmtthws-oss/conky/badges/master/coverage.svg)](https://gitlab.com/brndnmtthws-oss/conky/commits/master)
 
 <p align="center"><img width="300" src="logo/conky-logotype-horizontal-violet.png"></p>
 
