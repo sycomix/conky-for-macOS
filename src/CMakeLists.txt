@@ -3,7 +3,7 @@
 #
 # Please see COPYING for details
 #
-# Copyright (c) 2005-2018 Brenden Matthews, et. al. (see AUTHORS) All rights
+# Copyright (c) 2005-2019 Brenden Matthews, et. al. (see AUTHORS) All rights
 # reserved.
 #
 # This program is free software: you can redistribute it and/or modify it under
@@ -170,11 +170,6 @@ if(BUILD_AUDACIOUS)
   set(optional_sources ${optional_sources} ${audacious})
 endif(BUILD_AUDACIOUS)
 
-if(BUILD_BMPX)
-  set(bmpx bmpx.cc bmpx.h)
-  set(optional_sources ${optional_sources} ${bmpx})
-endif(BUILD_BMPX)
-
 if(BUILD_IBM)
   set(ibm ibm.cc ibm.h smapi.cc smapi.h)
   set(optional_sources ${optional_sources} ${ibm})
@@ -231,11 +226,6 @@ if(BUILD_HDDTEMP)
   set(hddtemp hddtemp.cc hddtemp.h)
   set(optional_sources ${optional_sources} ${hddtemp})
 endif(BUILD_HDDTEMP)
-
-if(BUILD_EVE)
-  set(eve eve.cc eve.h)
-  set(optional_sources ${optional_sources} ${eve})
-endif(BUILD_EVE)
 
 if(BUILD_CURL)
   set(ccurl_thread ccurl_thread.cc ccurl_thread.h)
@@ -298,6 +288,10 @@ if(BUILD_TESTS)
   target_link_libraries(conky_core ${conky_libs})
   add_executable(conky main.cc)
   target_link_libraries(conky conky_core ${conky_libs})
+  install(TARGETS conky_core
+          RUNTIME DESTINATION bin
+          LIBRARY DESTINATION lib
+          ARCHIVE DESTINATION lib)
 else()
   add_executable(conky main.cc ${conky_sources} ${optional_sources})
   target_link_libraries(conky ${conky_libs})

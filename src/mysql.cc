@@ -8,7 +8,7 @@
  *
  * Please see COPYING for details
  *
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -26,9 +26,9 @@
  *
  */
 
+#include "mysql.h"
 #include "conky.h"
 #include "logging.h"
-#include "mysql.h"
 
 #include <mysql.h>
 

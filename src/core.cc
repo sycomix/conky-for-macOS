@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -28,12 +28,12 @@
  */
 
 /* local headers */
+#include "core.h"
 #include "algebra.h"
 #include "bsdapm.h"
 #include "build.h"
 #include "colours.h"
 #include "combine.h"
-#include "core.h"
 #include "diskio.h"
 #include "entropy.h"
 #include "exec.h"
@@ -172,171 +172,171 @@ void stock_parse_arg(struct text_object *obj, const char *arg) {
     NORM_ERR("wrong number of arguments for $stock");
     return;
   }
-  if (!strcasecmp("ask", data))
+  if (!strcasecmp("ask", data)) {
     strncpy(data, "a", 3);
-  else if (!strcasecmp("adv", data))
+  } else if (!strcasecmp("adv", data)) {
     strncpy(data, "a2", 3);
-  else if (!strcasecmp("asksize", data))
+  } else if (!strcasecmp("asksize", data)) {
     strncpy(data, "a5", 3);
-  else if (!strcasecmp("bid", data))
+  } else if (!strcasecmp("bid", data)) {
     strncpy(data, "b", 3);
-  else if (!strcasecmp("askrt", data))
+  } else if (!strcasecmp("askrt", data)) {
     strncpy(data, "b2", 3);
-  else if (!strcasecmp("bidrt", data))
+  } else if (!strcasecmp("bidrt", data)) {
     strncpy(data, "b3", 3);
-  else if (!strcasecmp("bookvalue", data))
+  } else if (!strcasecmp("bookvalue", data)) {
     strncpy(data, "b4", 3);
-  else if (!strcasecmp("bidsize", data))
+  } else if (!strcasecmp("bidsize", data)) {
     strncpy(data, "b6", 3);
-  else if (!strcasecmp("change", data))
+  } else if (!strcasecmp("change", data)) {
     strncpy(data, "c1", 3);
-  else if (!strcasecmp("commission", data))
+  } else if (!strcasecmp("commission", data)) {
     strncpy(data, "c3", 3);
-  else if (!strcasecmp("changert", data))
+  } else if (!strcasecmp("changert", data)) {
     strncpy(data, "c6", 3);
-  else if (!strcasecmp("ahcrt", data))
+  } else if (!strcasecmp("ahcrt", data)) {
     strncpy(data, "c8", 3);
-  else if (!strcasecmp("ds", data))
+  } else if (!strcasecmp("ds", data)) {
     strncpy(data, "d", 3);
-  else if (!strcasecmp("ltd", data))
+  } else if (!strcasecmp("ltd", data)) {
     strncpy(data, "d1", 3);
-  else if (!strcasecmp("tradedate", data))
+  } else if (!strcasecmp("tradedate", data)) {
     strncpy(data, "d2", 3);
-  else if (!strcasecmp("es", data))
+  } else if (!strcasecmp("es", data)) {
     strncpy(data, "e", 3);
-  else if (!strcasecmp("ei", data))
+  } else if (!strcasecmp("ei", data)) {
     strncpy(data, "e1", 3);
-  else if (!strcasecmp("epsecy", data))
+  } else if (!strcasecmp("epsecy", data)) {
     strncpy(data, "e7", 3);
-  else if (!strcasecmp("epseny", data))
+  } else if (!strcasecmp("epseny", data)) {
     strncpy(data, "e8", 3);
-  else if (!strcasecmp("epsenq", data))
+  } else if (!strcasecmp("epsenq", data)) {
     strncpy(data, "e9", 3);
-  else if (!strcasecmp("floatshares", data))
+  } else if (!strcasecmp("floatshares", data)) {
     strncpy(data, "f6", 3);
-  else if (!strcasecmp("dayslow", data))
+  } else if (!strcasecmp("dayslow", data)) {
     strncpy(data, "g", 3);
-  else if (!strcasecmp("dayshigh", data))
+  } else if (!strcasecmp("dayshigh", data)) {
     strncpy(data, "h", 3);
-  else if (!strcasecmp("52weeklow", data))
+  } else if (!strcasecmp("52weeklow", data)) {
     strncpy(data, "j", 3);
-  else if (!strcasecmp("52weekhigh", data))
+  } else if (!strcasecmp("52weekhigh", data)) {
     strncpy(data, "k", 3);
-  else if (!strcasecmp("hgp", data))
+  } else if (!strcasecmp("hgp", data)) {
     strncpy(data, "g1", 3);
-  else if (!strcasecmp("ag", data))
+  } else if (!strcasecmp("ag", data)) {
     strncpy(data, "g3", 3);
-  else if (!strcasecmp("hg", data))
+  } else if (!strcasecmp("hg", data)) {
     strncpy(data, "g4", 3);
-  else if (!strcasecmp("hgprt", data))
+  } else if (!strcasecmp("hgprt", data)) {
     strncpy(data, "g5", 3);
-  else if (!strcasecmp("hgrt", data))
+  } else if (!strcasecmp("hgrt", data)) {
     strncpy(data, "g6", 3);
-  else if (!strcasecmp("moreinfo", data))
+  } else if (!strcasecmp("moreinfo", data)) {
     strncpy(data, "i", 3);
-  else if (!strcasecmp("obrt", data))
+  } else if (!strcasecmp("obrt", data)) {
     strncpy(data, "i5", 3);
-  else if (!strcasecmp("mc", data))
+  } else if (!strcasecmp("mc", data)) {
     strncpy(data, "j1", 3);
-  else if (!strcasecmp("mcrt", data))
+  } else if (!strcasecmp("mcrt", data)) {
     strncpy(data, "j3", 3);
-  else if (!strcasecmp("ebitda", data))
+  } else if (!strcasecmp("ebitda", data)) {
     strncpy(data, "j4", 3);
-  else if (!strcasecmp("c52wlow", data))
+  } else if (!strcasecmp("c52wlow", data)) {
     strncpy(data, "j5", 3);
-  else if (!strcasecmp("pc52wlow", data))
+  } else if (!strcasecmp("pc52wlow", data)) {
     strncpy(data, "j6", 3);
-  else if (!strcasecmp("cprt", data))
+  } else if (!strcasecmp("cprt", data)) {
     strncpy(data, "k2", 3);
-  else if (!strcasecmp("lts", data))
+  } else if (!strcasecmp("lts", data)) {
     strncpy(data, "k3", 3);
-  else if (!strcasecmp("c52whigh", data))
+  } else if (!strcasecmp("c52whigh", data)) {
     strncpy(data, "k4", 3);
-  else if (!strcasecmp("pc52whigh", data))
+  } else if (!strcasecmp("pc52whigh", data)) {
     strncpy(data, "k5", 3);
-  else if (!strcasecmp("ltp", data))
+  } else if (!strcasecmp("ltp", data)) {
     strncpy(data, "l1", 3);
-  else if (!strcasecmp("hl", data))
+  } else if (!strcasecmp("hl", data)) {
     strncpy(data, "l2", 3);
-  else if (!strcasecmp("ll", data))
+  } else if (!strcasecmp("ll", data)) {
     strncpy(data, "l3", 3);
-  else if (!strcasecmp("dr", data))
+  } else if (!strcasecmp("dr", data)) {
     strncpy(data, "m", 3);
-  else if (!strcasecmp("drrt", data))
+  } else if (!strcasecmp("drrt", data)) {
     strncpy(data, "m2", 3);
-  else if (!strcasecmp("50ma", data))
+  } else if (!strcasecmp("50ma", data)) {
     strncpy(data, "m3", 3);
-  else if (!strcasecmp("200ma", data))
+  } else if (!strcasecmp("200ma", data)) {
     strncpy(data, "m4", 3);
-  else if (!strcasecmp("c200ma", data))
+  } else if (!strcasecmp("c200ma", data)) {
     strncpy(data, "m5", 3);
-  else if (!strcasecmp("pc200ma", data))
+  } else if (!strcasecmp("pc200ma", data)) {
     strncpy(data, "m6", 3);
-  else if (!strcasecmp("c50ma", data))
+  } else if (!strcasecmp("c50ma", data)) {
     strncpy(data, "m7", 3);
-  else if (!strcasecmp("pc50ma", data))
+  } else if (!strcasecmp("pc50ma", data)) {
     strncpy(data, "m8", 3);
-  else if (!strcasecmp("name", data))
+  } else if (!strcasecmp("name", data)) {
     strncpy(data, "n", 3);
-  else if (!strcasecmp("notes", data))
+  } else if (!strcasecmp("notes", data)) {
     strncpy(data, "n4", 3);
-  else if (!strcasecmp("open", data))
+  } else if (!strcasecmp("open", data)) {
     strncpy(data, "o", 3);
-  else if (!strcasecmp("pc", data))
+  } else if (!strcasecmp("pc", data)) {
     strncpy(data, "p", 3);
-  else if (!strcasecmp("pricepaid", data))
+  } else if (!strcasecmp("pricepaid", data)) {
     strncpy(data, "p1", 3);
-  else if (!strcasecmp("cip", data))
+  } else if (!strcasecmp("cip", data)) {
     strncpy(data, "p2", 3);
-  else if (!strcasecmp("ps", data))
+  } else if (!strcasecmp("ps", data)) {
     strncpy(data, "p5", 3);
-  else if (!strcasecmp("pb", data))
+  } else if (!strcasecmp("pb", data)) {
     strncpy(data, "p6", 3);
-  else if (!strcasecmp("edv", data))
+  } else if (!strcasecmp("edv", data)) {
     strncpy(data, "q", 3);
-  else if (!strcasecmp("per", data))
+  } else if (!strcasecmp("per", data)) {
     strncpy(data, "r", 3);
-  else if (!strcasecmp("dpd", data))
+  } else if (!strcasecmp("dpd", data)) {
     strncpy(data, "r1", 3);
-  else if (!strcasecmp("perrt", data))
+  } else if (!strcasecmp("perrt", data)) {
     strncpy(data, "r2", 3);
-  else if (!strcasecmp("pegr", data))
+  } else if (!strcasecmp("pegr", data)) {
     strncpy(data, "r5", 3);
-  else if (!strcasecmp("pepsecy", data))
+  } else if (!strcasecmp("pepsecy", data)) {
     strncpy(data, "r6", 3);
-  else if (!strcasecmp("pepseny", data))
+  } else if (!strcasecmp("pepseny", data)) {
     strncpy(data, "r7", 3);
-  else if (!strcasecmp("symbol", data))
+  } else if (!strcasecmp("symbol", data)) {
     strncpy(data, "s", 3);
-  else if (!strcasecmp("sharesowned", data))
+  } else if (!strcasecmp("sharesowned", data)) {
     strncpy(data, "s1", 3);
-  else if (!strcasecmp("shortratio", data))
+  } else if (!strcasecmp("shortratio", data)) {
     strncpy(data, "s7", 3);
-  else if (!strcasecmp("ltt", data))
+  } else if (!strcasecmp("ltt", data)) {
     strncpy(data, "t1", 3);
-  else if (!strcasecmp("tradelinks", data))
+  } else if (!strcasecmp("tradelinks", data)) {
     strncpy(data, "t6", 3);
-  else if (!strcasecmp("tt", data))
+  } else if (!strcasecmp("tt", data)) {
     strncpy(data, "t7", 3);
-  else if (!strcasecmp("1ytp", data))
+  } else if (!strcasecmp("1ytp", data)) {
     strncpy(data, "t8", 3);
-  else if (!strcasecmp("volume", data))
+  } else if (!strcasecmp("volume", data)) {
     strncpy(data, "v", 3);
-  else if (!strcasecmp("hv", data))
+  } else if (!strcasecmp("hv", data)) {
     strncpy(data, "v1", 3);
-  else if (!strcasecmp("hvrt", data))
+  } else if (!strcasecmp("hvrt", data)) {
     strncpy(data, "v7", 3);
-  else if (!strcasecmp("52weekrange", data))
+  } else if (!strcasecmp("52weekrange", data)) {
     strncpy(data, "w", 3);
-  else if (!strcasecmp("dvc", data))
+  } else if (!strcasecmp("dvc", data)) {
     strncpy(data, "w1", 3);
-  else if (!strcasecmp("dvcrt", data))
+  } else if (!strcasecmp("dvcrt", data)) {
     strncpy(data, "w4", 3);
-  else if (!strcasecmp("se", data))
+  } else if (!strcasecmp("se", data)) {
     strncpy(data, "x", 3);
-  else if (!strcasecmp("dy", data))
+  } else if (!strcasecmp("dy", data)) {
     strncpy(data, "y", 3);
-  else {
+  } else {
     NORM_ERR(
         "\"%s\" is not supported by $stock. Supported: 1ytp, 200ma, 50ma, "
         "52weeklow, 52weekhigh, 52weekrange, adv, ag, ahcrt, ask, askrt, "
@@ -352,7 +352,7 @@ void stock_parse_arg(struct text_object *obj, const char *arg) {
     return;
   }
 #define MAX_FINYAH_URL_LENGTH 64
-  obj->data.s = (char *)malloc(MAX_FINYAH_URL_LENGTH);
+  obj->data.s = static_cast<char *>(malloc(MAX_FINYAH_URL_LENGTH));
   snprintf(obj->data.s, MAX_FINYAH_URL_LENGTH,
            "http://download.finance.yahoo.com/d/quotes.csv?s=%s&f=%s", stock,
            data);
@@ -429,9 +429,9 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   obj->callbacks.free = &gen_free_opaque;
 #endif /* !__OpenBSD__ */
   END OBJ(freq, nullptr) get_cpu_count();
-  if ((arg == nullptr) || (isdigit((unsigned char)arg[0]) == 0) ||
+  if ((arg == nullptr) || (isdigit(static_cast<unsigned char>(arg[0])) == 0) ||
       strlen(arg) >= 3 || atoi(&arg[0]) == 0 ||
-      (unsigned int) atoi(&arg[0]) > info.cpu_count) {
+      static_cast<unsigned int>(atoi(&arg[0])) > info.cpu_count) {
     obj->data.i = 1;
     /* NORM_ERR("freq: Invalid CPU number or you don't have that many CPUs! "
       "Displaying the clock for CPU 1."); */
@@ -440,9 +440,9 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   }
   obj->callbacks.print = &print_freq;
   END OBJ(freq_g, nullptr) get_cpu_count();
-  if ((arg == nullptr) || (isdigit((unsigned char)arg[0]) == 0) ||
+  if ((arg == nullptr) || (isdigit(static_cast<unsigned char>(arg[0])) == 0) ||
       strlen(arg) >= 3 || atoi(&arg[0]) == 0 ||
-      (unsigned int) atoi(&arg[0]) > info.cpu_count) {
+      static_cast<unsigned int>(atoi(&arg[0])) > info.cpu_count) {
     obj->data.i = 1;
     /* NORM_ERR("freq_g: Invalid CPU number or you don't have that many "
       "CPUs! Displaying the clock for CPU 1."); */
@@ -468,7 +468,7 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
 #if defined(__linux__)
   END OBJ(voltage_mv, 0) get_cpu_count();
   if (!arg || !isdigit((unsigned char)arg[0]) || strlen(arg) >= 3 ||
-      atoi(&arg[0]) == 0 || (unsigned int) atoi(&arg[0]) > info.cpu_count) {
+      atoi(&arg[0]) == 0 || (unsigned int)atoi(&arg[0]) > info.cpu_count) {
     obj->data.i = 1;
     /* NORM_ERR("voltage_mv: Invalid CPU number or you don't have that many "
       "CPUs! Displaying voltage for CPU 1."); */
@@ -478,7 +478,7 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   obj->callbacks.print = &print_voltage_mv;
   END OBJ(voltage_v, 0) get_cpu_count();
   if (!arg || !isdigit((unsigned char)arg[0]) || strlen(arg) >= 3 ||
-      atoi(&arg[0]) == 0 || (unsigned int) atoi(&arg[0]) > info.cpu_count) {
+      atoi(&arg[0]) == 0 || (unsigned int)atoi(&arg[0]) > info.cpu_count) {
     obj->data.i = 1;
     /* NORM_ERR("voltage_v: Invalid CPU number or you don't have that many "
       "CPUs! Displaying voltage for CPU 1."); */
@@ -490,37 +490,37 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
 #endif /* __linux__ */
 
 #ifdef BUILD_WLAN
-    END OBJ(wireless_essid, &update_net_stats) obj->data.opaque =
-    get_net_stat(arg, obj, free_at_crash);
-    parse_net_stat_arg(obj, arg, free_at_crash);
-    obj->callbacks.print = &print_wireless_essid;
-    END OBJ(wireless_channel, &update_net_stats)
-    parse_net_stat_arg(obj, arg, free_at_crash);
-    obj->callbacks.print = &print_wireless_channel;
-    END OBJ(wireless_freq, &update_net_stats)
-    parse_net_stat_arg(obj, arg, free_at_crash);
-    obj->callbacks.print = &print_wireless_frequency;
-    END OBJ(wireless_mode, &update_net_stats)
-    parse_net_stat_arg(obj, arg, free_at_crash);
-    obj->callbacks.print = &print_wireless_mode;
-    END OBJ(wireless_bitrate, &update_net_stats)
-    parse_net_stat_arg(obj, arg, free_at_crash);
-    obj->callbacks.print = &print_wireless_bitrate;
-    END OBJ(wireless_ap, &update_net_stats)
-    parse_net_stat_arg(obj, arg, free_at_crash);
-    obj->callbacks.print = &print_wireless_ap;
-    END OBJ(wireless_link_qual, &update_net_stats)
-    parse_net_stat_arg(obj, arg, free_at_crash);
-    obj->callbacks.print = &print_wireless_link_qual;
-    END OBJ(wireless_link_qual_max, &update_net_stats)
-    parse_net_stat_arg(obj, arg, free_at_crash);
-    obj->callbacks.print = &print_wireless_link_qual_max;
-    END OBJ(wireless_link_qual_perc, &update_net_stats)
-    parse_net_stat_arg(obj, arg, free_at_crash);
-    obj->callbacks.print = &print_wireless_link_qual_perc;
-    END OBJ(wireless_link_bar, &update_net_stats)
-    parse_net_stat_bar_arg(obj, arg, free_at_crash);
-    obj->callbacks.barval = &wireless_link_barval;
+  END OBJ(wireless_essid, &update_net_stats) obj->data.opaque =
+      get_net_stat(arg, obj, free_at_crash);
+  parse_net_stat_arg(obj, arg, free_at_crash);
+  obj->callbacks.print = &print_wireless_essid;
+  END OBJ(wireless_channel, &update_net_stats)
+      parse_net_stat_arg(obj, arg, free_at_crash);
+  obj->callbacks.print = &print_wireless_channel;
+  END OBJ(wireless_freq, &update_net_stats)
+      parse_net_stat_arg(obj, arg, free_at_crash);
+  obj->callbacks.print = &print_wireless_frequency;
+  END OBJ(wireless_mode, &update_net_stats)
+      parse_net_stat_arg(obj, arg, free_at_crash);
+  obj->callbacks.print = &print_wireless_mode;
+  END OBJ(wireless_bitrate, &update_net_stats)
+      parse_net_stat_arg(obj, arg, free_at_crash);
+  obj->callbacks.print = &print_wireless_bitrate;
+  END OBJ(wireless_ap, &update_net_stats)
+      parse_net_stat_arg(obj, arg, free_at_crash);
+  obj->callbacks.print = &print_wireless_ap;
+  END OBJ(wireless_link_qual, &update_net_stats)
+      parse_net_stat_arg(obj, arg, free_at_crash);
+  obj->callbacks.print = &print_wireless_link_qual;
+  END OBJ(wireless_link_qual_max, &update_net_stats)
+      parse_net_stat_arg(obj, arg, free_at_crash);
+  obj->callbacks.print = &print_wireless_link_qual_max;
+  END OBJ(wireless_link_qual_perc, &update_net_stats)
+      parse_net_stat_arg(obj, arg, free_at_crash);
+  obj->callbacks.print = &print_wireless_link_qual_perc;
+  END OBJ(wireless_link_bar, &update_net_stats)
+      parse_net_stat_bar_arg(obj, arg, free_at_crash);
+  obj->callbacks.barval = &wireless_link_barval;
 #endif /* BUILD_WLAN */
 
 #ifndef __OpenBSD__
@@ -546,7 +546,8 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   obj->callbacks.print = &print_battery_short;
   obj->callbacks.free = &gen_free_opaque;
 
-  END OBJ(battery_status, 0) obj->data.s = strndup(arg ? arg : "BAT0", text_buffer_size.get(*state));
+  END OBJ(battery_status, 0) obj->data.s =
+      strndup(arg ? arg : "BAT0", text_buffer_size.get(*state));
   obj->callbacks.print = &print_battery_status;
   obj->callbacks.free = &gen_free_opaque;
   END OBJ(battery_time, nullptr) char bat[64];
@@ -664,7 +665,7 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   END OBJ(obsd_vendor, 0) obj->callbacks.print = &get_obsd_vendor;
   END OBJ(obsd_product, 0) obj->callbacks.print = &get_obsd_product;
 #endif /* __OpenBSD__ */
-  END OBJ(buffers, &update_meminfo)  obj->data.s = STRNDUP_ARG;
+  END OBJ(buffers, &update_meminfo) obj->data.s = STRNDUP_ARG;
   obj->callbacks.print = &print_buffers;
   obj->callbacks.free = &gen_free_opaque;
   END OBJ(cached, &update_meminfo) obj->data.s = STRNDUP_ARG;
@@ -873,7 +874,8 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   obj->callbacks.free = &gen_free_opaque;
 #endif /* __FreeBSD__ */
 
-  END OBJ(password, 0) obj->data.s = strndup(arg ? arg : "20", text_buffer_size.get(*state));
+  END OBJ(password, 0) obj->data.s =
+      strndup(arg ? arg : "20", text_buffer_size.get(*state));
   obj->callbacks.print = &print_password;
   obj->callbacks.free = &gen_free_opaque;
 
@@ -1096,11 +1098,11 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   obj->callbacks.print = &print_sip_status;
   obj->callbacks.free = &gen_free_opaque;
 #else
-  END OBJ_IF_ARG(
-      if_running, 0,
-      "if_running needs an argument") char buf[text_buffer_size.get(*state)];
+  END OBJ_IF_ARG(if_running, 0, "if_running needs an argument")
 
-  snprintf(buf, text_buffer_size.get(*state), "pidof %s >/dev/null", arg);
+      char buf[DEFAULT_TEXT_BUFFER_SIZE];
+
+  snprintf(buf, DEFAULT_TEXT_BUFFER_SIZE, "pidof %s >/dev/null", arg);
   obj->data.s = STRNDUP_ARG;
   /* XXX: maybe use a different callback here */
   obj->callbacks.iftest = &if_running_iftest;
@@ -1449,9 +1451,10 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   obj->callbacks.print = &print_totalup;
   END OBJ(updates, nullptr) obj->callbacks.print = &print_updates;
   END OBJ_IF(if_updatenr, nullptr) obj->data.i = arg != nullptr ? atoi(arg) : 0;
-  if (obj->data.i == 0)
+  if (obj->data.i == 0) {
     CRIT_ERR(obj, free_at_crash,
              "if_updatenr needs a number above 0 as argument");
+  }
   set_updatereset(obj->data.i > get_updatereset() ? obj->data.i
                                                   : get_updatereset());
   obj->callbacks.iftest = &updatenr_iftest;
@@ -1517,8 +1520,7 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   obj->callbacks.print = &print_pop3_used;
   obj->callbacks.free = &free_mail_obj;
 #ifdef BUILD_IBM
-  END OBJ_ARG(smapi, 0, "smapi needs an argument") obj->data.s =
-      STRNDUP_ARG;
+  END OBJ_ARG(smapi, 0, "smapi needs an argument") obj->data.s = STRNDUP_ARG;
   obj->callbacks.print = &print_smapi;
   obj->callbacks.free = &gen_free_opaque;
   END OBJ_IF_ARG(if_smapi_bat_installed, 0,
@@ -1716,21 +1718,6 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   END OBJ(audacious_bar, 0) scan_bar(obj, arg, 1);
   obj->callbacks.barval = &audacious_barval;
 #endif /* BUILD_AUDACIOUS */
-#ifdef BUIL_BMPX
-  END OBJ(bmpx_title, &update_bmpx) obj->callbacks.print = &print_bmpx_title;
-  END OBJ(bmpx_artist, &update_bmpx) obj->callbacks.print = &print_bmpx_artist;
-  END OBJ(bmpx_album, &update_bmpx) obj->callbacks.print = &print_bmpx_album;
-  END OBJ(bmpx_track, &update_bmpx) obj->callbacks.print = &print_bmpx_track;
-  END OBJ(bmpx_uri, &update_bmpx) obj->callbacks.print = &print_bmpx_uri;
-  END OBJ(bmpx_bitrate, &update_bmpx) obj->callbacks.print =
-      &print_bmpx_bitrate;
-#endif /* BUILD_BMPX */
-#ifdef BUILD_EVE
-  END OBJ_ARG(eve, 0, "eve needs arguments: <userid> <apikey> <characterid>")
-      scan_eve(obj, arg);
-  obj->callbacks.print = &print_eve;
-  obj->callbacks.free = &free_eve;
-#endif /* BUILD_EVE */
 #ifdef BUILD_CURL
   END OBJ_ARG(curl, 0, "curl needs arguments: <uri> <interval in minutes>")
       curl_parse_arg(obj, arg);
@@ -1746,7 +1733,8 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   obj->callbacks.free = &rss_free_obj_info;
 #endif /* BUILD_RSS */
 #ifdef BUILD_WEATHER_METAR
-  END OBJ_ARG(weather, 0, "weather still needs to written...") obj->callbacks.print = &print_weather;
+  END OBJ_ARG(weather, 0, "weather still needs to written...")
+      obj->callbacks.print = &print_weather;
 #endif /* BUILD_WEATHER_METAR */
   END OBJ_ARG(lua, nullptr,
               "lua needs arguments: <function name> [function parameters]")
@@ -1800,8 +1788,7 @@ struct text_object *construct_text_object(char *s, const char *arg, long line,
   obj->callbacks.free = &gen_free_opaque;
 #endif /* BUILD_X11 */
 #ifdef BUILD_HDDTEMP
-  END OBJ(hddtemp, &update_hddtemp) if (arg) obj->data.s =
-      STRNDUP_ARG;
+  END OBJ(hddtemp, &update_hddtemp) if (arg) obj->data.s = STRNDUP_ARG;
   obj->callbacks.print = &print_hddtemp;
   obj->callbacks.free = &free_hddtemp;
 #endif /* BUILD_HDDTEMP */
@@ -2077,8 +2064,8 @@ int extract_variable_text_internal(struct text_object *retval,
         } else {
           s = p;
           if (*p == '#') { p++; }
-          while ((*p != 0) &&
-                 ((isalnum((unsigned char)(*p)) != 0) || *p == '_')) {
+          while ((*p != 0) && ((isalnum(static_cast<unsigned char>(*p)) != 0) ||
+                               *p == '_')) {
             p++;
           }
         }
@@ -2112,14 +2099,14 @@ int extract_variable_text_internal(struct text_object *retval,
           arg = strchr(buf, ' ');
           *arg = '\0';
           arg++;
-          while (isspace((unsigned char)(*arg)) != 0) { arg++; }
+          while (isspace(static_cast<unsigned char>(*arg)) != 0) { arg++; }
           if (*arg == 0) { arg = nullptr; }
         }
 
         /* lowercase variable name */
         tmp_p = buf;
         while (*tmp_p != 0) {
-          *tmp_p = tolower((unsigned char)*tmp_p);
+          *tmp_p = tolower(static_cast<unsigned char>(*tmp_p));
           tmp_p++;
         }
 

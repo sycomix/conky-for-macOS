@@ -4,7 +4,7 @@
  *
  * Please see COPYING for details
  *
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -231,6 +231,8 @@ extern priv::colour_setting default_outline_color;
 extern conky::range_config_setting<int> border_inner_margin;
 extern conky::range_config_setting<int> border_outer_margin;
 extern conky::range_config_setting<int> border_width;
+
+extern conky::simple_config_setting<bool> forced_redraw;
 
 #ifdef BUILD_XFT
 extern conky::simple_config_setting<bool> use_xft;

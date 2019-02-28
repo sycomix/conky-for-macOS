@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -29,8 +29,8 @@
 #ifndef _BSDAPM_H
 #define _BSDAPM_H
 
-void print_apm_adapter(struct text_object *, char *, int);
-void print_apm_battery_life(struct text_object *, char *, int);
-void print_apm_battery_time(struct text_object *, char *, int);
+void print_apm_adapter(struct text_object *, char *, unsigned int);
+void print_apm_battery_life(struct text_object *, char *, unsigned int);
+void print_apm_battery_time(struct text_object *, char *, unsigned int);
 
 #endif /* _BSDAPM_H */

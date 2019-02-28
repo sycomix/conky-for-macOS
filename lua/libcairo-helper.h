@@ -4,7 +4,7 @@
  *
  * Please see COPYING for details
  *
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -47,9 +47,6 @@ void destroy_cairo_font_extents_t(cairo_font_extents_t *pointer) {
   free(pointer);
 }
 
-void destroy_cairo_matrix_t(cairo_matrix_t *pointer) {
-  free(pointer);
-}
-
+void destroy_cairo_matrix_t(cairo_matrix_t *pointer) { free(pointer); }
 
 #endif /* _LIBCAIRO_HELPER_H_ */

@@ -3,7 +3,7 @@
 #
 # Please see COPYING for details
 #
-# Copyright (c) 2005-2018 Brenden Matthews, et. al. (see AUTHORS) All rights
+# Copyright (c) 2005-2019 Brenden Matthews, et. al. (see AUTHORS) All rights
 # reserved.
 #
 # This program is free software: you can redistribute it and/or modify it under
@@ -110,7 +110,7 @@ endif(NOT LIB_INSTALL_DIR)
 set(PACKAGE_LIBRARY_DIR "${LIB_INSTALL_DIR}/conky"
     CACHE STRING "Package library path (where Lua bindings are installed"
     FORCE)
-set(DEFAULTNETDEV "eth0" CACHE STRING "Default networkdevice")
+set(DEFAULTNETDEV "eno1" CACHE STRING "Default networkdevice")
 
 # Mac only override
 if(OS_DARWIN)
@@ -220,8 +220,6 @@ option(BUILD_LUA_RSVG "Build rsvg bindings for Lua" false)
 
 option(BUILD_AUDACIOUS "Build audacious (music player) support" false)
 
-option(BUILD_BMPX "Build BMPx (music player) support" false)
-
 option(BUILD_MPD "Enable if you want MPD (music player) support" true)
 
 option(BUILD_MYSQL "Enable if you want MySQL support" false)
@@ -229,8 +227,6 @@ option(BUILD_MYSQL "Enable if you want MySQL support" false)
 option(BUILD_MOC "Enable if you want MOC (music player) support" true)
 
 option(BUILD_XMMS2 "Enable if you want XMMS2 (music player) support" false)
-
-option(BUILD_EVE "Enable if you want Eve-Online skill monitoring support" true)
 
 option(BUILD_CURL "Enable if you want Curl support" false)
 

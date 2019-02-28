@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -218,7 +218,7 @@ void get_fs_type(const char *path, char *result) {
 void init_fs_bar(struct text_object *obj, const char *arg) {
   arg = scan_bar(obj, arg, 1);
   if (arg != nullptr) {
-    while (isspace((unsigned char)*arg) != 0) { arg++; }
+    while (isspace(static_cast<unsigned char>(*arg)) != 0) { arg++; }
     if (*arg == '\0') { arg = "/"; }
   } else {
     arg = "/";

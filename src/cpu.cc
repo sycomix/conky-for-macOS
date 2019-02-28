@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -48,7 +48,6 @@
 
 #define AmD 0x68747541
 #define InteL 0x756e6547
-#define FMT_UINT "%" PRIuMAX
 
 #if defined(__FreeBSD__)
 #define TICKZ 100L
@@ -66,7 +65,10 @@ uint8_t has_tsc_reg(void) {
 
   CPU_REGS(0x00000000, vend, leafs);
   if (0x00000001 > leafs) { return 1U; }
-  if ((uint32_t)vend != AmD && (uint32_t)vend != InteL) { return 1U; }
+  if (static_cast<uint32_t>(vend) != AmD &&
+      static_cast<uint32_t>(vend) != InteL) {
+    return 1U;
+  }
 
   CPU_STR2(0x00000001, eax, ebx, ecx, edx);
   if (0U == (edx & (1U << 4U))) { return 1U; }
@@ -90,7 +92,7 @@ uintmax_t rdtsc(void) {
       : "=a"(ticklo), "=d"(tickhi)::"%rbx", "%rcx");
 
   CPU_FEATURE(0x80000000, regz);
-  if (0x80000001 > (uint32_t)regz) { goto seeya; }
+  if (0x80000001 > static_cast<uint32_t>(regz)) { goto seeya; }
   CPU_STR2(0x80000001, eax, ebx, ecx, edx);
 
   if (0U != (edx & (1U << 27U))) {
@@ -105,7 +107,8 @@ uintmax_t rdtsc(void) {
   }
 
 seeya:
-  return (((uintmax_t)tickhi << 32) | (uintmax_t)ticklo);
+  return ((static_cast<uintmax_t>(tickhi) << 32) |
+          static_cast<uintmax_t>(ticklo));
 }
 
 void get_cpu_clock_speed(char *str1, unsigned int p_max_size) {
@@ -119,7 +122,7 @@ void get_cpu_clock_speed(char *str1, unsigned int p_max_size) {
   if (-1 == (nanosleep(&tc, NULL))) { return; }
   z = rdtsc();
 
-  snprintf(str1, p_max_size, FMT_UINT " MHz", ((z - x) / 100000U));
+  snprintf(str1, p_max_size, "%ju MHz", ((z - x) / 100000U));
 }
 
 void print_freq2(struct text_object *obj, char *p, unsigned int p_max_size) {

@@ -3,7 +3,7 @@
 #
 # Please see COPYING for details
 #
-# Copyright (c) 2005-2018 Brenden Matthews, et. al. (see AUTHORS) All rights
+# Copyright (c) 2005-2019 Brenden Matthews, et. al. (see AUTHORS) All rights
 # reserved.
 #
 # This program is free software: you can redistribute it and/or modify it under
@@ -94,13 +94,13 @@ if(MAINTAINER_MODE)
   install(FILES ${MAN_FILES} DESTINATION ${MAN_PATH})
 endif(MAINTAINER_MODE)
 
+if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+  install(FILES conky.desktop DESTINATION share/applications)
+  install(FILES logo/conky-logomark-violet.svg
+          DESTINATION share/icons/hicolor/scalable/apps)
+endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+
 if(CHECK_CODE_QUALITY)
-  # Set up clang-tidy
-  set(CLANG_TIDY_BIN_NAME
-      clang-tidy
-      clang-tidy-5.0
-      clang-tidy-6.0
-      clang-tidy-7.0)
-  set(CLANG_TIDY_EXCLUDE_PATTERNS "build/" ${CMAKE_BINARY_DIR})
   find_package(ClangTidy)
+  find_package(ClangFormat)
 endif(CHECK_CODE_QUALITY)

@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2007 Toni Spets
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -257,6 +257,8 @@ int update_total_processes() {
   kvm_getprocs(kd, KERN_PROC_ALL, 0, &n_processes);
 
   info.procs = n_processes;
+
+  return 0;
 }
 
 void update_running_processes() {

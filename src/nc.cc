@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -52,9 +52,7 @@ void out_to_ncurses_setting::lua_setter(lua::state &l, bool init) {
 void out_to_ncurses_setting::cleanup(lua::state &l) {
   lua::stack_sentry s(l, -1);
 
-  if (do_convert(l, -1).first) {
-    endwin();
-  }
+  if (do_convert(l, -1).first) { endwin(); }
 
   l.pop();
 }

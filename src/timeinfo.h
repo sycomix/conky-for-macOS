@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -44,7 +44,8 @@ void scan_tztime(struct text_object *, const char *);
 void print_time(struct text_object *, char *, unsigned int);
 void print_utime(struct text_object *, char *, unsigned int);
 void print_tztime(struct text_object *, char *, unsigned int);
-void print_format_time(struct text_object *obj, char *p, unsigned int p_max_size);
+void print_format_time(struct text_object *obj, char *p,
+                       unsigned int p_max_size);
 
 /* free object data */
 void free_time(struct text_object *);

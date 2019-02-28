@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -77,6 +77,7 @@ int update_net_stats() {
 
 int update_total_processes() {
   // TODO
+  return 0;
 }
 
 int update_running_processes() {
@@ -143,7 +144,8 @@ int update_cpu_usage() {
   return 1;
 }
 
-void free_cpu(struct text_object *) { /* no-op */ }
+void free_cpu(struct text_object *) { /* no-op */
+}
 
 int update_load_average() {
   // TODO

@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -129,14 +129,14 @@ enum arg_type get_arg_type(const char *arg) {
     p++;
   }
   while (p <= e) {
-    if (isdigit((unsigned char)*p) == 0) { break; }
+    if (isdigit(static_cast<unsigned char>(*p)) == 0) { break; }
     p++;
   }
   if (p == e + 1) { return ARG_LONG; }
   if (*p == '.' || *p == ',') {
     p++;
     while (p <= e) {
-      if (isdigit((unsigned char)*p) == 0) { return ARG_BAD; }
+      if (isdigit(static_cast<unsigned char>(*p)) == 0) { return ARG_BAD; }
       p++;
     }
     return ARG_DOUBLE;

@@ -3,7 +3,7 @@
  * Conky, a system monitor, based on torsmo
  *
  * Copyright (c) 2009 Toni Spets
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -32,7 +32,10 @@ extern "C" {
 }
 
 #ifdef HAVE_SYS_INOTIFY_H
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc99-extensions"
 #include <sys/inotify.h>
+#pragma clang diagnostic pop
 
 void llua_append_notify(const char *name);
 void llua_rm_notifies(void);
@@ -212,11 +215,13 @@ void llua_load(const char *script) {
 static const char *tokenize(const char *str, size_t *len) {
   str += *len;
   *len = 0;
-  while ((str != nullptr) && (isspace((unsigned char)*str) != 0)) { ++str; }
+  while ((str != nullptr) && (isspace(static_cast<unsigned char>(*str)) != 0)) {
+    ++str;
+  }
 
   size_t level = 0;
   while ((str != nullptr) && (str[*len] != 0) &&
-         (level > 0 || (isspace((unsigned char)str[*len]) == 0))) {
+         (level > 0 || (isspace(static_cast<unsigned char>(str[*len])) == 0))) {
     switch (str[*len]) {
       case '{':
         ++level;

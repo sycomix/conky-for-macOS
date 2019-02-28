@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -49,7 +49,10 @@
 #include <sys/param.h>
 #include <sys/time.h>
 #ifdef HAVE_SYS_INOTIFY_H
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wc99-extensions"
 #include <sys/inotify.h>
+#pragma clang diagnostic pop
 #endif /* HAVE_SYS_INOTIFY_H */
 #ifdef BUILD_X11
 #pragma GCC diagnostic push
@@ -131,21 +134,17 @@
 #include <microhttpd.h>
 #endif /* BUILD_HTTP */
 
-#if defined(__FreeBSD_kernel__)
-#include <bsd/bsd.h>
-#endif
+#ifdef BUILD_OLD_CONFIG
+#include "convertconf.h"
+#endif /* BUILD_OLD_CONFIG */
 
 #ifdef BUILD_BUILTIN_CONFIG
 #include "defconfig.h"
 
-#ifdef BUILD_OLD_CONFIG
-#include "convertconf.h"
-#endif
-
 namespace {
 const char builtin_config_magic[] = "==builtin==";
 }  // namespace
-#endif
+#endif /* BUILD_BUILTIN_CONFIG */
 
 #ifndef S_ISSOCK
 #define S_ISSOCK(x) ((x & S_IFMT) == S_IFSOCK)
@@ -784,7 +783,7 @@ static void generate_text() {
 
     tmp_p = text_buffer;
     while (*tmp_p != 0) {
-      *tmp_p = toupper((unsigned char)*tmp_p);
+      *tmp_p = toupper(static_cast<unsigned char>(*tmp_p));
       tmp_p++;
     }
   }
@@ -2046,9 +2045,11 @@ void main_loop() {
 #endif
               if (ev.xproperty.atom == ATOM(_XROOTPMAP_ID) ||
                   ev.xproperty.atom == ATOM(_XROOTMAP_ID)) {
-                draw_stuff();
-                next_update_time = get_time();
-                need_to_update = 1;
+                if (forced_redraw.get(*state)) {
+                  draw_stuff();
+                  next_update_time = get_time();
+                  need_to_update = 1;
+                }
               }
 #ifdef USE_ARGB
             }
@@ -2205,7 +2206,7 @@ void main_loop() {
 #endif /* BUILD_X11 */
       struct timespec req, rem;
       auto time_to_sleep = next_update_time - get_time();
-      auto seconds = (time_t)std::floor(time_to_sleep);
+      auto seconds = static_cast<time_t>(std::floor(time_to_sleep));
       auto nanos = (time_to_sleep - seconds) * 1000000000L;
       req.tv_sec = seconds;
       req.tv_nsec = nanos;

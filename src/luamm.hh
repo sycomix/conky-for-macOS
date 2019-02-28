@@ -111,7 +111,7 @@ class syntax_error : public lua::exception {
   const syntax_error &operator=(const syntax_error &) = delete;
 
  public:
-  syntax_error(state *L) : lua::exception(L) {}
+  explicit syntax_error(state *L) : lua::exception(L) {}
 
   syntax_error(syntax_error &&other) : lua::exception(std::move(other)) {}
 };
@@ -122,7 +122,7 @@ class file_error : public lua::exception {
   const file_error &operator=(const file_error &) = delete;
 
  public:
-  file_error(state *L) : lua::exception(L) {}
+  explicit file_error(state *L) : lua::exception(L) {}
 
   file_error(file_error &&other) : lua::exception(std::move(other)) {}
 };
@@ -134,7 +134,7 @@ class errfunc_error : public lua::exception {
   const errfunc_error &operator=(const errfunc_error &) = delete;
 
  public:
-  errfunc_error(state *L) : lua::exception(L) {}
+  explicit errfunc_error(state *L) : lua::exception(L) {}
 
   errfunc_error(errfunc_error &&other) : lua::exception(std::move(other)) {}
 };
@@ -152,8 +152,7 @@ class state : private std::mutex {
       // throwing exceptions in destructors is a bad idea
       // but we catch (and ignore) them, just in case
       ptr->~T();
-    } catch (...) {
-    }
+    } catch (...) {}
     return 0;
   }
 
@@ -204,7 +203,8 @@ class state : private std::mutex {
   }
   bool isnil(int index) throw() { return lua_isnil(cobj.get(), index); }
   bool isnone(int index) throw() { return lua_isnone(cobj.get(), index); }
-  bool isnumber(int index) throw() { return lua_isnumber(cobj.get(), index); }
+  /* isnumber conflicts with some headers on BSD systems */
+  bool _isnumber(int index) throw() { return lua_isnumber(cobj.get(), index); }
   bool isstring(int index) throw() { return lua_isstring(cobj.get(), index); }
   void pop(int n = 1) throw() { lua_pop(cobj.get(), n); }
   void pushboolean(bool b) throw() { lua_pushboolean(cobj.get(), b); }
@@ -305,9 +305,9 @@ class state : private std::mutex {
   void setfield(int index, const char *k);
   void setglobal(const char *name);
   void settable(int index);
-  // lua_tostring uses nullptr to indicate conversion error, since there is no such
-  // thing as a nullptr std::string, we throw an exception. Returned value may
-  // contain '\0'
+  // lua_tostring uses nullptr to indicate conversion error, since there is no
+  // such thing as a nullptr std::string, we throw an exception. Returned value
+  // may contain '\0'
   std::string tostring(int index);
   // allocate a new lua userdata of appropriate size, and create a object in it
   // pushes the userdata on stack and returns the pointer
@@ -343,8 +343,7 @@ class stack_sentry {
   const stack_sentry &operator=(const stack_sentry &) = delete;
 
  public:
-  explicit stack_sentry(state &l, int n_ = 0)
-      : L(&l), n(l.gettop() + n_) {
+  explicit stack_sentry(state &l, int n_ = 0) : L(&l), n(l.gettop() + n_) {
     assert(n >= 0);
   }
 

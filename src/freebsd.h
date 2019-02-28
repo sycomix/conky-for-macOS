@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -40,6 +40,8 @@
 #if (defined(i386) || defined(__i386__))
 #include <machine/apm_bios.h>
 #endif /* i386 || __i386__ */
+
+extern kvm_t *kd;
 
 int get_entropy_avail(unsigned int *);
 int get_entropy_poolsize(unsigned int *);

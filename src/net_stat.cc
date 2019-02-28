@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -118,14 +118,16 @@ struct net_stat *get_net_stat(const char *dev, void * /*free_at_crash1*/,
 
 void parse_net_stat_arg(struct text_object *obj, const char *arg,
                         void *free_at_crash) {
+#ifdef BUILD_IPV6
   bool shownetmask = false;
   bool showscope = false;
+#endif               /* BUILD_IPV6 */
   char nextarg[21];  // longest arg possible is a devname (max 20 chars)
   int i = 0;
   struct net_stat *netstat = nullptr;
   long int x = 0;
   unsigned int found = 0;
-  char *arg_ptr = (char *)arg;
+  char *arg_ptr = const_cast<char *>(arg);
   char buf[64];
   char *buf_ptr = buf;
 
@@ -138,7 +140,7 @@ void parse_net_stat_arg(struct text_object *obj, const char *arg,
   if (0 == strncmp(arg, "${iface", 7)) {
     if (nullptr != arg_ptr) {
       for (; *arg_ptr; arg_ptr++) {
-        if (isdigit((unsigned char)*arg_ptr)) {
+        if (isdigit(static_cast<unsigned char>(*arg_ptr))) {
           *buf_ptr++ = *arg_ptr;
           found = 1;
         }
@@ -152,6 +154,7 @@ void parse_net_stat_arg(struct text_object *obj, const char *arg,
   }
 
   while (sscanf(arg + i, " %20s", nextarg) == 1) {
+#ifdef BUILD_IPV6
     if (strcmp(nextarg, "-n") == 0 || strcmp(nextarg, "--netmask") == 0) {
       shownetmask = true;
     } else if (strcmp(nextarg, "-s") == 0 || strcmp(nextarg, "--scope") == 0) {
@@ -162,10 +165,14 @@ void parse_net_stat_arg(struct text_object *obj, const char *arg,
         if (nextarg[j] == 's') { showscope = true; }
       }
     } else {
+#endif /* BUILD_IPV6 */
       netstat = get_net_stat(nextarg, obj, free_at_crash);
+#ifdef BUILD_IPV6
     }
+#endif                     /* BUILD_IPV6 */
     i += strlen(nextarg);  // skip this arg
-    while (!((isspace((unsigned char)arg[i]) != 0) || arg[i] == 0)) {
+    while (
+        !((isspace(static_cast<unsigned char>(arg[i])) != 0) || arg[i] == 0)) {
       i++;  // and skip the spaces in front of it
     }
   }

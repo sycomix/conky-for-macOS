@@ -8,7 +8,7 @@
  *
  * Please see COPYING for details
  *
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -42,6 +42,10 @@
 #ifdef BUILD_CURL
 #include "ccurl_thread.h"
 #endif /* BUILD_CURL */
+
+#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
+#include "freebsd.h"
+#endif /* FreeBSD */
 
 #ifdef BUILD_BUILTIN_CONFIG
 #include "defconfig.h"
@@ -108,9 +112,6 @@ static void print_version() {
 #ifdef BUILD_NVIDIA
             << _("  * nvidia\n")
 #endif /* BUILD_NVIDIA */
-#ifdef BUILD_EVE
-            << _("  * eve-online\n")
-#endif /* BUILD_EVE */
 #ifdef BUILD_BUILTIN_CONFIG
             << _("  * builtin default configuration\n")
 #endif /* BUILD_BUILTIN_CONFIG */
@@ -180,16 +181,13 @@ static void print_version() {
             << _("  * Own window\n")
 #endif
 #endif /* BUILD_X11 */
-#if defined BUILD_AUDACIOUS || defined BUILD_BMPX || defined BUILD_CMUS || \
-    defined BUILD_MPD || defined BUILD_MOC || defined BUILD_XMMS2
+#if defined BUILD_AUDACIOUS || defined BUILD_CMUS || defined BUILD_MPD || \
+    defined BUILD_MOC || defined BUILD_XMMS2
             << _("\n Music detection:\n")
 #endif
 #ifdef BUILD_AUDACIOUS
             << _("  * Audacious\n")
 #endif /* BUILD_AUDACIOUS */
-#ifdef BUILD_BMPX
-            << _("  * BMPx\n")
-#endif /* BUILD_BMPX */
 #ifdef BUILD_CMUS
             << _("  * CMUS\n")
 #endif /* BUILD_CMUS */
@@ -283,10 +281,11 @@ int main(int argc, char **argv) {
 #ifdef BUILD_CURL
   struct curl_global_initializer {
     curl_global_initializer() {
-      if (curl_global_init(CURL_GLOBAL_ALL))
+      if (curl_global_init(CURL_GLOBAL_ALL)) {
         NORM_ERR(
             "curl_global_init() failed, you may not be able to use curl "
             "variables");
+      }
     }
     ~curl_global_initializer() { curl_global_cleanup(); }
   };
@@ -316,8 +315,9 @@ int main(int argc, char **argv) {
         current_config = optarg;
         break;
       case 'q':
-        if (freopen("/dev/null", "w", stderr) == nullptr)
+        if (freopen("/dev/null", "w", stderr) == nullptr) {
           CRIT_ERR(nullptr, nullptr, "could not open /dev/null as stderr!");
+        }
         break;
       case 'h':
         print_help(argv[0]);

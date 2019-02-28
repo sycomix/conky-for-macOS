@@ -9,7 +9,7 @@
  * Please see COPYING for details
  *
  * Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
- * Copyright (c) 2005-2018 Brenden Matthews, Philip Kovacs, et. al.
+ * Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al.
  *	(see AUTHORS)
  * All rights reserved.
  *
@@ -337,6 +337,8 @@ conky::range_config_setting<int> border_width("border_width", 0,
 conky::simple_config_setting<bool> use_xft("use_xft", false, false);
 #endif
 
+conky::simple_config_setting<bool> forced_redraw("forced_redraw", false, false);
+
 #ifdef OWN_WINDOW
 conky::simple_config_setting<bool> set_transparent("own_window_transparent",
                                                    false, false);
@@ -383,9 +385,9 @@ x11_error_handler(Display *d, XErrorEvent *err) {
   NORM_ERR(
       "X Error: type %i Display %lx XID %li serial %lu error_code %i "
       "request_code %i minor_code %i other Display: %lx\n",
-      err->type, (long unsigned)err->display, (long)err->resourceid,
-      err->serial, err->error_code, err->request_code, err->minor_code,
-      (long unsigned)d);
+      err->type, (long unsigned)err->display,
+      static_cast<long>(err->resourceid), err->serial, err->error_code,
+      err->request_code, err->minor_code, (long unsigned)d);
   abort();
 }
 
