@@ -297,6 +297,7 @@ centos6 gcc-7:
     LINKER_FLAGS: "-ltinfo"
   before_script:
     - source /opt/rh/devtoolset-7/enable
+    - echo $GCS_STORAGE_KEY > $SCCACHE_GCS_KEY_PATH
 
 centos7 gcc-7:
   <<: *build_stages
@@ -313,6 +314,7 @@ centos7 gcc-7:
     BUILD_JOURNAL: "OFF"
   before_script:
     - source /opt/rh/devtoolset-7/enable
+    - echo $GCS_STORAGE_KEY > $SCCACHE_GCS_KEY_PATH
 
 centos7 gcc-8:
   <<: *build_stages
@@ -329,6 +331,7 @@ centos7 gcc-8:
     BUILD_JOURNAL: "OFF"
   before_script:
     - source /opt/rh/devtoolset-8/enable
+    - echo $GCS_STORAGE_KEY > $SCCACHE_GCS_KEY_PATH
 
 centos7 clang-5:
   <<: *build_stages
@@ -344,6 +347,7 @@ centos7 clang-5:
     BUILD_JOURNAL: "OFF"
   before_script:
     - source /opt/rh/llvm-toolset-7/enable
+    - echo $GCS_STORAGE_KEY > $SCCACHE_GCS_KEY_PATH
 
 .freebsd_deps: &freebsd_deps
   retry:
@@ -353,14 +357,19 @@ centos7 clang-5:
       - stuck_or_timeout_failure
       - unknown_failure
       - api_failure
+  allow_failure: true
   tags:
     - freebsd12
   before_script:
-    # Try up to 5 times until installation succeeds. It may be locked.
+    - echo $GCS_STORAGE_KEY > $SCCACHE_GCS_KEY_PATH
+    # Try up to 7 times until installation succeeds. It may be locked.
     - >
-      for i in {1..7}; do
+      (
+      flock -x -w 600 9 || exit 1;
+      sudo pkg update;
       sudo pkg install -y -q
       cairo
+      cmake
       docbook-xsl
       docbook2X
       gettext-runtime
@@ -383,8 +392,8 @@ centos7 clang-5:
       mysql80-client
       pkgconf
       xmms2
-      $COMPILER_PACKAGE 
-      && break || sleep $(expr $i \* $i + 15); done
+      $COMPILER_PACKAGE
+      ) 9>/var/lock/pkg
 
 .freebsd_build_script: &freebsd_build_script
   script:
@@ -459,6 +468,20 @@ freebsd12 clang-7:
     - if [ "$COMPILER" == "clang-7" ] ; then make -j4 test-conky-coverage-txt ; fi
     - if [ "$COMPILER" == "clang-7" ] ; then make -j4 test-conky-coverage-html ; fi
     - if [ "$COMPILER" == "clang-7" ] ; then lcov-summary test-conky-coverage-html.info.cleaned ; fi
+    - make -j4
+    - if [[ "$DISTRO" == "freebsd12" ]] ; then sudo make install ; else make install ; fi
+    - conky -v
+    - find . -iname '*.gcda' -delete
+    - >
+      cmake
+      -DCMAKE_C_COMPILER_LAUNCHER=sccache
+      -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
+      -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      -DRELEASE=ON
+      ..
+    - make -j4
+    - if [[ "$DISTRO" == "freebsd12" ]] ; then sudo make install ; else make install ; fi
+    - conky -v
   coverage: '/Total Coverage:\s+(\d+\.\d+)%/'
   artifacts:
     name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME-coverage-report"
@@ -547,6 +570,7 @@ test centos6 gcc-7:
     CXX: g++
   before_script:
     - source /opt/rh/devtoolset-7/enable
+    - echo $GCS_STORAGE_KEY > $SCCACHE_GCS_KEY_PATH
 
 test centos7 clang-5:
   <<: *test_stages
@@ -558,6 +582,7 @@ test centos7 clang-5:
     CXX: clang++
   before_script:
     - source /opt/rh/llvm-toolset-7/enable
+    - echo $GCS_STORAGE_KEY > $SCCACHE_GCS_KEY_PATH
 
 test centos7 gcc-7:
   <<: *test_stages
@@ -569,6 +594,7 @@ test centos7 gcc-7:
     CXX: g++
   before_script:
     - source /opt/rh/devtoolset-7/enable
+    - echo $GCS_STORAGE_KEY > $SCCACHE_GCS_KEY_PATH
 
 test centos7 gcc-8:
   <<: *test_stages
@@ -580,6 +606,7 @@ test centos7 gcc-8:
     CXX: g++
   before_script:
     - source /opt/rh/devtoolset-8/enable
+    - echo $GCS_STORAGE_KEY > $SCCACHE_GCS_KEY_PATH
 
 test freebsd12 clang-7:
   <<: *freebsd_deps
