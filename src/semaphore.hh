@@ -62,7 +62,7 @@ class semaphore {
 
     int ret = dispatch_semaphore_wait(sem, DISPATCH_TIME_NOW);
 
-    while (ret != 0) {
+    while (ret) {
       if (ret == DISPATCH_EAGAIN) {
         return false;
       } else if (errno != EINTR) {
