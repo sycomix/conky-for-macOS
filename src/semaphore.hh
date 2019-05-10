@@ -57,12 +57,12 @@ class semaphore {
   void wait() { dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER); }
 
   bool trywait() {
-    /* XXX Quick patch */
+      /* WARNING: This value is not stated anywhere in the docs. */
 #define DISPATCH_EAGAIN 49
 
     int ret = dispatch_semaphore_wait(sem, DISPATCH_TIME_NOW);
 
-    while (ret > 0) {
+    while (ret != 0) {
       if (ret == DISPATCH_EAGAIN) {
         return false;
       } else if (errno != EINTR) {
