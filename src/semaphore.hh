@@ -38,6 +38,9 @@
 
 #include <dispatch/dispatch.h>
 
+/* WARNING: This value is not stated anywhere in the docs. */
+#define DISPATCH_EAGAIN 49
+
 class semaphore {
   dispatch_semaphore_t sem;
 
@@ -57,9 +60,6 @@ class semaphore {
   void wait() { dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER); }
 
   bool trywait() {
-      /* WARNING: This value is not stated anywhere in the docs. */
-#define DISPATCH_EAGAIN 49
-
     int ret = dispatch_semaphore_wait(sem, DISPATCH_TIME_NOW);
 
     while (ret) {
