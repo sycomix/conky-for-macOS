@@ -39,6 +39,9 @@
 #include "specials.h"
 #include "text_object.h"
 
+#include <sys/param.h>
+#include <sys/mount.h>
+
 /* this is the root of all per disk stats,
  * also containing the totals. */
 struct diskio_stat stats;
@@ -59,11 +62,12 @@ struct diskio_stat *prepare_diskio_stat(const char *s) {
       device_name(text_buffer_size.get(*state)),
       device_s(text_buffer_size.get(*state));
   struct diskio_stat *cur = &stats;
-  char *rpbuf;
+  char *rpbuf = nullptr;
   char rpbuf2[256];
 
   if (s == nullptr) { return &stats; }
 
+#if (!defined(__APPLE__) && !defined(__MACH__))
   if (strncmp(s, "label:", 6) == 0) {
     snprintf(&(device_name[0]), text_buffer_size.get(*state),
              "/dev/disk/by-label/%s", s + 6);
@@ -73,6 +77,20 @@ struct diskio_stat *prepare_diskio_stat(const char *s) {
              "/dev/disk/by-partuuid/%s", s + 9);
     rpbuf = realpath(&device_name[0], nullptr);
     snprintf(rpbuf2, 255, "%s", rpbuf);
+#else
+  if (0 == strncmp(s, "label:", 6)) {
+    struct statfs buf;
+    
+    // we take everything from 6 and beyond; it may even be a mountpoint instead of a label
+    snprintf(&(device_name[0]), PATH_MAX, "/Volumes/%s", s + 6);
+
+    if (statfs(&(device_name[0]), &buf) == 0) {
+      rpbuf = (char *)malloc(sizeof(buf.f_mntfromname));
+      strcpy(rpbuf, buf.f_mntfromname);
+    }
+  } else if (0 == (strncmp(s, "partuuid:", 9))) {
+  
+#endif
   } else {
     rpbuf = realpath(s, nullptr);
   }
@@ -84,7 +102,7 @@ struct diskio_stat *prepare_diskio_stat(const char *s) {
     strncpy(&device_s[0], s, text_buffer_size.get(*state));
   }
 
-#if defined(__FreeBSD__) || defined(__DragonFly__) || defined(__linux__)
+#if defined(__FreeBSD__) || defined(__DragonFly__) || defined(__linux__) || (defined(__APPLE__) && defined(__MACH__))
   if (strncmp(&device_s[0], "/dev/", 5) == 0) {
     device_s.erase(device_s.begin(), device_s.begin() + 5);
   }
