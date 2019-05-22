@@ -81,7 +81,7 @@ struct diskio_stat *prepare_diskio_stat(const char *s) {
   if (0 == strncmp(s, "label:", 6)) {
     struct statfs buf;
     
-    // we take everything from 6 and beyond; it may even be a mountpoint instead of a label
+    // we take everything from 6 and beyond.
     snprintf(&(device_name[0]), PATH_MAX, "/Volumes/%s", s + 6);
 
     if (statfs(&(device_name[0]), &buf) == 0) {
@@ -89,7 +89,8 @@ struct diskio_stat *prepare_diskio_stat(const char *s) {
       strcpy(rpbuf, buf.f_mntfromname);
     }
   } else if (0 == (strncmp(s, "partuuid:", 9))) {
-  
+    NORM_ERR("ERROR: partuuid is not supported on macOS yet.");
+    return &stats;
 #endif
   } else {
     rpbuf = realpath(s, nullptr);
