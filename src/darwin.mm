@@ -69,6 +69,13 @@
 #include "darwin_sip.h"  // sip status
 
 #include <vector>
+#include "diskio.h"
+
+#include <IOKit/IOKitLib.h>
+#include <IOKit/storage/IOBlockStorageDriver.h>
+#include <IOKit/storage/IOMedia.h>
+#include <IOKit/IOBSD.h>
+#import <CoreFoundation/CoreFoundation.h>
 
 #ifdef BUILD_IPGFREQ
 #include <IntelPowerGadget/EnergyLib.h>
@@ -1118,8 +1125,78 @@ char get_freq(char *p_client_buffer, size_t client_buffer_size,
   return 1;
 }
 
+void getDISKcounters(io_iterator_t drivelist, UInt64 *totalReadBytes = 0, UInt64 *totalWriteBytes = 0)
+{
+  io_registry_entry_t drive       = 0;
+  
+  while ((drive = IOIteratorNext(drivelist))) {
+    CFNumberRef     number      = 0;
+    CFDictionaryRef properties  = 0;
+    CFDictionaryRef statistics  = 0;
+    UInt64      value       = 0;
+    
+    /* Obtain the properties for this drive object */
+    IORegistryEntryCreateCFProperties(drive, (CFMutableDictionaryRef *) &properties, kCFAllocatorDefault, kNilOptions);
+    
+    /* Obtain the statistics from the drive properties */
+    statistics = (CFDictionaryRef) CFDictionaryGetValue(properties, CFSTR(kIOBlockStorageDriverStatisticsKey));
+    
+    if (statistics) {
+      /* Obtain the number of bytes read from the drive statistics */
+      number = (CFNumberRef) CFDictionaryGetValue(statistics, CFSTR(kIOBlockStorageDriverStatisticsBytesReadKey));
+      if (number) {
+        CFNumberGetValue(number, kCFNumberSInt64Type, &value);
+        *totalReadBytes += value;
+      }
+      
+      /* Obtain the number of bytes written from the drive statistics */
+      number = (CFNumberRef) CFDictionaryGetValue (statistics, CFSTR(kIOBlockStorageDriverStatisticsBytesWrittenKey));
+      if (number) {
+        CFNumberGetValue(number, kCFNumberSInt64Type, &value);
+        *totalWriteBytes += value;
+      }
+    }
+
+    /* Release resources */
+    CFRelease(properties); properties = 0;
+    IOObjectRelease(drive); drive = 0;
+  }
+  IOIteratorReset(drivelist);
+}
+
 int update_diskio() {
-  printf("update_diskio: STUB\n");
+  // used code from: https://stackoverflow.com/questions/11962296/how-can-i-retrieve-read-write-disk-info
+  
+  struct diskio_stat *cur = nullptr;
+
+  UInt64 reads = 0, writes = 0;
+  UInt64 total_reads = 0, total_writes = 0;
+
+  io_iterator_t drivelist  = IO_OBJECT_NULL;
+  mach_port_t masterPort = IO_OBJECT_NULL;
+
+  /* get ports and services for drive stats */
+  /* Obtain the I/O Kit communication handle */
+  IOMasterPort(bootstrap_port, &masterPort);
+  
+  /* Obtain the list of all drive objects */
+  IOServiceGetMatchingServices(masterPort,
+                               IOServiceMatching("IOBlockStorageDriver"),
+                               &drivelist);
+
+  for (cur = stats.next; cur != nullptr; cur = cur->next) {
+    
+    /* get reads & writes in bytes */
+    getDISKcounters(drivelist, &reads, &writes);
+    
+    total_reads += (reads /= 512);
+    total_writes += (writes /= 512);
+    
+    update_diskio_values(cur, reads, writes);
+  }
+
+  update_diskio_values(&stats, total_reads, total_writes);
+
   return 0;
 }
 
