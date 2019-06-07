@@ -1125,16 +1125,16 @@ char get_freq(char *p_client_buffer, size_t client_buffer_size,
   return 1;
 }
 
-void getDISKcounters(io_iterator_t drivelist, UInt64 *totalReadBytes = 0, UInt64 *totalWriteBytes = 0)
+void getDISKcounters(io_iterator_t drivelist, UInt64 *readBytes = 0, UInt64 *writeBytes = 0)
 {
-  io_registry_entry_t drive       = 0;
+    io_registry_entry_t drive   = 0;
   
-  while ((drive = IOIteratorNext(drivelist))) {
     CFNumberRef     number      = 0;
     CFDictionaryRef properties  = 0;
     CFDictionaryRef statistics  = 0;
-    UInt64      value       = 0;
-    
+  
+    drive = IOIteratorNext(drivelist);
+  
     /* Obtain the properties for this drive object */
     IORegistryEntryCreateCFProperties(drive, (CFMutableDictionaryRef *) &properties, kCFAllocatorDefault, kNilOptions);
     
@@ -1145,23 +1145,19 @@ void getDISKcounters(io_iterator_t drivelist, UInt64 *totalReadBytes = 0, UInt64
       /* Obtain the number of bytes read from the drive statistics */
       number = (CFNumberRef) CFDictionaryGetValue(statistics, CFSTR(kIOBlockStorageDriverStatisticsBytesReadKey));
       if (number) {
-        CFNumberGetValue(number, kCFNumberSInt64Type, &value);
-        *totalReadBytes += value;
+        CFNumberGetValue(number, kCFNumberSInt64Type, readBytes);
       }
       
       /* Obtain the number of bytes written from the drive statistics */
       number = (CFNumberRef) CFDictionaryGetValue (statistics, CFSTR(kIOBlockStorageDriverStatisticsBytesWrittenKey));
       if (number) {
-        CFNumberGetValue(number, kCFNumberSInt64Type, &value);
-        *totalWriteBytes += value;
+        CFNumberGetValue(number, kCFNumberSInt64Type, writeBytes);
       }
     }
 
     /* Release resources */
     CFRelease(properties); properties = 0;
     IOObjectRelease(drive); drive = 0;
-  }
-  IOIteratorReset(drivelist);
 }
 
 int update_diskio() {
@@ -1186,7 +1182,7 @@ int update_diskio() {
 
   for (cur = stats.next; cur != nullptr; cur = cur->next) {
     
-    /* get reads & writes in bytes */
+    /* get reads & writes in bytes for current drive */
     getDISKcounters(drivelist, &reads, &writes);
     
     total_reads += (reads /= 512);
@@ -1196,6 +1192,8 @@ int update_diskio() {
   }
 
   update_diskio_values(&stats, total_reads, total_writes);
+
+  IOIteratorReset(drivelist);
 
   return 0;
 }
