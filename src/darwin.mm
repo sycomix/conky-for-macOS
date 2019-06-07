@@ -1170,6 +1170,8 @@ int update_diskio() {
 
   io_iterator_t drivelist  = IO_OBJECT_NULL;
   mach_port_t masterPort = IO_OBJECT_NULL;
+  
+  stats.current = stats.current_read = stats.current_write = 0;
 
   /* get ports and services for drive stats */
   /* Obtain the I/O Kit communication handle */
