@@ -107,7 +107,9 @@ endif(NOT OS_DARWIN)
 
 if (OS_DARWIN)
   find_library(CF CoreFoundation)
+  find_library(IO IOKit)
   set(conky_libs ${conky_libs} ${CF})
+  set(conky_libs ${conky_libs} ${IO})
 endif(OS_DARWIN)
 
 if(OS_FREEBSD)
