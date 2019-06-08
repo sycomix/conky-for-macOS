@@ -105,6 +105,11 @@ if(NOT OS_DARWIN)
     )
 endif(NOT OS_DARWIN)
 
+if (OS_DARWIN)
+  find_library(CF CoreFoundation)
+  set(conky_libs ${conky_libs} ${CF})
+endif(OS_DARWIN)
+
 if(OS_FREEBSD)
   add_definitions(-D__BSD_VISIBLE=1 -D_XOPEN_SOURCE=700)
   set(
