@@ -293,6 +293,12 @@ void allocate_cpu_sample(struct cpusample **sample) {
   sample_handle = *sample; /* use a public handle for deallocating */
 }
 
+void deallocate_cpu_sample(struct cpusample *sample) {
+  if (sample) {
+    delete sample;
+  }
+}
+
 void free_cpu(struct text_object *) {
   if (sample_handle != nullptr) {
     free(sample_handle);
@@ -1247,6 +1253,8 @@ static void calc_cpu_total(struct process *proc, uint64_t *total) {
   proc->previous_total_cpu_time = current_total;
 
   *total = ((*total / sysconf(_SC_CLK_TCK)) * 100) / info.cpu_count;
+  
+  deallocate_cpu_sample(sample);
 }
 
 /*
