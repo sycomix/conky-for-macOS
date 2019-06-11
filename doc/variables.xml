@@ -853,6 +853,8 @@
         form of sda for /dev/sda. A block device label can be specified with
         label:foo and a block device partuuid can be specified with
         partuuid:40000000-01.
+        NOTE: on macOS, conky searches for devices with given label ONLY in
+        /Volumes.
         <para /></listitem>
     </varlistentry>
     <varlistentry>
