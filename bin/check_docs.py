@@ -58,7 +58,7 @@ config_xml.write(file_names['config_settings'])
 
 def tidy(file):
 	command = ['tidy', '-qim', '-xml', '-utf8', '--indent-spaces', '4']
-	os.system('%s %s 2>/dev/null' % (string.join(command), file))
+	os.system(f'{string.join(command)} {file} 2>/dev/null')
 
 tidy(file_names['variables'])
 tidy(file_names['config_settings'])

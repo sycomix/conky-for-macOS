@@ -71,9 +71,11 @@ def make_diff(file, original, reformatted):
         difflib.unified_diff(
             original,
             reformatted,
-            fromfile='{}\t(original)'.format(file),
-            tofile='{}\t(reformatted)'.format(file),
-            n=3))
+            fromfile=f'{file}\t(original)',
+            tofile=f'{file}\t(reformatted)',
+            n=3,
+        )
+    )
 
 
 class DiffError(Exception):
@@ -91,13 +93,11 @@ class UnexpectedError(Exception):
 
 def run_clang_format_diff_wrapper(args, file):
     try:
-        ret = run_clang_format_diff(args, file)
-        return ret
+        return run_clang_format_diff(args, file)
     except DiffError:
         raise
     except Exception as e:
-        raise UnexpectedError('{}: {}: {}'.format(file, e.__class__.__name__,
-                                                  e), e)
+        raise UnexpectedError(f'{file}: {e.__class__.__name__}: {e}', e)
 
 
 def run_clang_format_diff(args, file):
@@ -152,8 +152,10 @@ def run_clang_format_diff(args, file):
     errs = list(proc_stderr.readlines())
     proc.wait()
     if proc.returncode:
-        raise DiffError("clang-format exited with status {}: '{}'".format(
-            proc.returncode, file), errs)
+        raise DiffError(
+            f"clang-format exited with status {proc.returncode}: '{file}'",
+            errs,
+        )
     return make_diff(file, original, outs), errs
 
 
@@ -200,7 +202,7 @@ def print_trouble(prog, message, use_colors):
     error_text = 'error:'
     if use_colors:
         error_text = bold_red(error_text)
-    print("{}: {} {}".format(prog, error_text, message), file=sys.stderr)
+    print(f"{prog}: {error_text} {message}", file=sys.stderr)
 
 
 def main():
@@ -212,9 +214,9 @@ def main():
         default='clang-format')
     parser.add_argument(
         '--extensions',
-        help='comma separated list of file extensions (default: {})'.format(
-            DEFAULT_EXTENSIONS),
-        default=DEFAULT_EXTENSIONS)
+        help=f'comma separated list of file extensions (default: {DEFAULT_EXTENSIONS})',
+        default=DEFAULT_EXTENSIONS,
+    )
     parser.add_argument(
         '-r',
         '--recursive',

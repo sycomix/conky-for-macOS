@@ -82,21 +82,19 @@ def main():
   filename = None
   lines_by_file = {}
   for line in sys.stdin:
-    match = re.search('^\+\+\+\ \"?(.*?/){%s}([^ \t\n\"]*)' % args.p, line)
-    if match:
+    if match := re.search('^\+\+\+\ \"?(.*?/){%s}([^ \t\n\"]*)' % args.p,
+                          line):
       filename = match.group(2)
-    if filename == None:
+    if filename is None:
       continue
 
-    if args.regex is not None:
-      if not re.match('^%s$' % args.regex, filename):
-        continue
-    else:
-      if not re.match('^%s$' % args.iregex, filename, re.IGNORECASE):
+    if args.regex is None:
+      if not re.match(f'^{args.iregex}$', filename, re.IGNORECASE):
         continue
 
-    match = re.search('^@@.*\+(\d+)(,(\d+))?', line)
-    if match:
+    elif not re.match(f'^{args.regex}$', filename):
+      continue
+    if match := re.search('^@@.*\+(\d+)(,(\d+))?', line):
       start_line = int(match.group(1))
       line_count = 1
       if match.group(3):
@@ -106,7 +104,7 @@ def main():
       end_line = start_line + line_count - 1;
       lines_by_file.setdefault(filename, []).append([start_line, end_line])
 
-  if len(lines_by_file) == 0:
+  if not lines_by_file:
     print("No relevant changes found.")
     sys.exit(0)
 
@@ -121,23 +119,23 @@ def main():
     quote = "'";
 
   # Run clang-tidy on files containing changes.
-  command = [args.clang_tidy_binary]
-  command.append('-line-filter=' + quote + line_filter_json + quote)
+  command = [
+      args.clang_tidy_binary,
+      f'-line-filter={quote}{line_filter_json}{quote}',
+  ]
   if args.fix:
     command.append('-fix')
   if args.checks != '':
-    command.append('-checks=' + quote + args.checks + quote)
+    command.append(f'-checks={quote}{args.checks}{quote}')
   if args.format_style != '':
-    command.append('-format-style=' + quote + args.format_style + quote)
+    command.append(f'-format-style={quote}{args.format_style}{quote}')
   if args.quiet:
     command.append('-quiet')
   if args.build_path is not None:
-    command.append('-p=%s' % args.build_path)
+    command.append(f'-p={args.build_path}')
   command.extend(lines_by_file.keys())
-  for arg in args.extra_arg:
-      command.append('-extra-arg=%s' % arg)
-  for arg in args.extra_arg_before:
-      command.append('-extra-arg-before=%s' % arg)
+  command.extend(f'-extra-arg={arg}' for arg in args.extra_arg)
+  command.extend(f'-extra-arg-before={arg}' for arg in args.extra_arg_before)
   command.extend(clang_tidy_args)
 
   sys.exit(subprocess.call(' '.join(command), shell=True))

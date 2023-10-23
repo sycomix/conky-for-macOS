@@ -16,12 +16,7 @@ def check_file(filename, excludes, extensions):
         if len(excludes) == 0:
             return True
 
-        for exclude in excludes:
-            if exclude in filename:
-                return False
-
-        return True
-
+        return all(exclude not in filename for exclude in excludes)
     return False
 
 
@@ -38,7 +33,7 @@ def check_directory(directory, excludes, extensions):
         for file in files:
             filename = os.path.join(root, file)
             if check_file(filename, excludes, extensions):
-                print("Will check file [{}]".format(filename))
+                print(f"Will check file [{filename}]")
                 output.append(filename)
     return output
 
@@ -64,13 +59,7 @@ def clean_git_filename(line):
     # ignored file
     if '!' in git_status:
         return None
-    # Covers renamed files
-    if '->' in line:
-        file = line[3:].split('->')[-1].strip()
-    else:
-        file = line[3:].strip()
-
-    return file
+    return line[3:].split('->')[-1].strip() if '->' in line else line[3:].strip()
 
 
 def get_changed_files(git_bin, excludes, file_extensions):
